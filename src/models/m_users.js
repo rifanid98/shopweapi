@@ -83,6 +83,18 @@ function getDataById(id) {
   })
 }
 
+function getDataByName(name) {
+  return new Promise((resolve, reject) => {
+    const sqlQuery = "SELECT * FROM users WHERE username = ?";
+    conn.query(sqlQuery, name, function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
 function getFieldsName() {
   return new Promise((resolve, reject) => {
     conn.query(`DESCRIBE users`, function (error, result) {
@@ -118,6 +130,7 @@ module.exports = {
   updateData,
   deleteData,
   getDataById,
+  getDataByName,
   getFieldsName,
   getTotalData
 }
