@@ -95,6 +95,94 @@ function getDataByName(name) {
   })
 }
 
+function getDataUserOrders(id) {
+  return new Promise((resolve, reject) => {
+    // belum dijoin dengan tabel payments dan tabel shipments
+    const sqlQuery = `
+    SELECT
+      o.id AS order_id,
+      o.user_id,
+      o.tracking_number,
+      o.address,
+      SUM(do.quantity) AS quantity,
+      SUM(do.sub_total) AS total,
+      o.updated_at
+    FROM 
+      detail_order AS do 
+    INNER JOIN 
+      orders AS o 
+    ON 
+      o.id=do.order_id
+    WHERE 
+      o.user_id = ?
+    GROUP BY 
+      o.id
+    `;
+    conn.query(sqlQuery, id, function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
+function getDataDetailUserOrders(user_id, order_id) {
+  return new Promise((resolve, reject) => {
+    const sqlQuery = `
+    SELECT 
+      o.id AS order_id,
+      o.user_id,
+      do.id AS detail_order_id,
+      do.size,
+      do.color,
+      do.price,
+      do.quantity,
+      do.sub_total,
+      p.id AS product_id,
+      p.name AS product_name,
+      p.image,
+      b.name AS brand_name,
+      c.name AS category_name
+
+    FROM 
+        categories AS c 
+      INNER JOIN 
+        products AS p 
+      INNER JOIN 
+        brands AS b 
+      ON 
+        c.id=p.category_id 
+      AND 
+        b.id=p.brand_id
+
+      INNER JOIN 
+        detail_order AS do 
+      ON 
+        p.id=do.product_id 
+
+      INNER JOIN 
+        orders AS o 
+      ON 
+        o.id=do.order_id
+
+    WHERE 
+      o.user_id = ? 
+    AND 
+      do.order_id = ?
+
+    GROUP BY p.id
+    `;
+    conn.query(sqlQuery, [user_id, order_id], function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
+
 function getFieldsName() {
   return new Promise((resolve, reject) => {
     conn.query(`DESCRIBE users`, function (error, result) {
@@ -131,6 +219,8 @@ module.exports = {
   deleteData,
   getDataById,
   getDataByName,
+  getDataUserOrders,
+  getDataDetailUserOrders,
   getFieldsName,
   getTotalData
 }
