@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2020 at 04:36 AM
+-- Generation Time: Aug 08, 2020 at 06:20 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -167,6 +167,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `full_name`, `email`, `password`, `phone`, `image`, `address`, `address_active`, `role`, `access_key`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin admin', 'admin@admin.com', '$2b$10$GkG9XeGne3Te9JETETsZJ.n7.W1NMM9qK9vd31S3S.YA/PrU/uNXO', '089606415122', 'http://192.168.43.81:3000/shopwe/images/avatar.png', 'address_name-penerima-alamat-kota-kode_pos-telepon|name-penerima-alamat-kota-kode_pos-telepon-negara|address_name-penerima-alamat-kota-kode_pos-telepon|name-penerima-alamat-kota-kode_pos-telepon-negara|', 0, 1, 'admin', '2020-08-08 04:19:48', '2020-08-08 04:19:48');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -286,7 +293,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
