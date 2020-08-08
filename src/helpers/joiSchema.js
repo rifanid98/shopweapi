@@ -317,5 +317,39 @@ module.exports = {
 			}
 			resolve();
 		});
-	}
+	},
+	validateResetPassword: function (reset, field = null) {
+		const joiSchema = {
+			// bookImage: Joi.required(),
+			password: Joi.string().alphanum().trim().min(1).required(),
+			otp: Joi.number().min(6).max(6).required(),
+			id: Joi.number().min(1).required()
+		};
+
+		if (!field) {
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(reset, joiSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		} else {
+			const dynamicSchema = Object.keys(joiSchema)
+				.filter(key => field.includes(key))
+				.reduce((obj, key) => {
+					obj[key] = joiSchema[key];
+					return obj;
+				}, {});
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(reset, dynamicSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		}
+	},
 }
