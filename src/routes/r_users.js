@@ -34,7 +34,10 @@ router.delete('/:id', usersController.deleteUser);
  */
 // Get User By ID
 router.get('/:id', usersController.getUserById);
-
+// Get User Orders
+router.get('/:id/orders', usersController.getUserOrders);
+// Get User Orders
+router.get('/:user_id/orders/:order_id', usersController.getDetailUserOrders);
 /**
  * Use authMiddleware example.
  * 1. Admin
