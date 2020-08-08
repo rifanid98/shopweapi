@@ -57,11 +57,14 @@ This project was made by team 2, talent academy tech academy batch 16 group 3.
 
 ## Contributor
 
-[<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][website]
-[<img align="left" alt="codeSTACKr | YouTube" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/youtube.svg" />][youtube]
-[<img align="left" alt="codeSTACKr | Twitter" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]
-[<img align="left" alt="codeSTACKr | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin]
-[<img align="left" alt="codeSTACKr | Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]
+-   Adnin Rifandi Sutanto Putra
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />][github] [Adnin Rifandi](https://github.com/rifanid98)
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/facebook.svg" />][facebook] [Adnin Rifandi](https://https://web.facebook.com/adnin.rifandi754)
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin] [Adnin Rifandi](https://www.linkedin.com/in/adnin-rifandi/)
+-   Muhammad Rizky
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />](https://github.com/rifanid98)
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/facebook.svg" />](https://https://web.facebook.com/adnin.rifandi754)
+    [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/adnin-rifandi/)
 
 ## License
 
