@@ -4,6 +4,7 @@
  * Load Model
  */
 const authModel = require("../models/m_auth");
+const usersModel = require("../models/m_users");
 
 /**
  * custom response helper
@@ -38,43 +39,6 @@ const nodemailer = require("nodemailer");
 /**
  * CRUD
  */
-async function preRegister(req, res) {
-	try {
-		const body = req.body;
-		totp.options = {
-			digits: 6,
-			step: 60 * 3
-		};
-		const token = totp.generate(process.env.OTP_KEY);
-		const transporter = nodemailer.createTransport({
-			host: 'smtp.gmail.com',
-			port: 465,
-			secure: true,
-			auth: {
-				user: process.env.EMAIL,
-				pass: process.env.PASSWORD
-			}
-		});
-
-		// send mail with defined transport object
-		let info = await transporter.sendMail({
-			from: process.env.EMAIL,
-			to: body.email,
-			subject: 'OTP (One Time Password)',
-			text: `This is shown if you request to register your account at ShopWe. OTP : ${token}`,
-			// html: "<b>OTP PASSWORD</b>", // html body
-		});
-		const message = {
-			otp: token,
-			note: 'This is for development only!'
-		}
-		return myResponse.response(res, "success", message, 201, "Created!");
-	} catch (error) {
-		console.log(error);
-		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
-	}
-}
-
 async function register(req, res) {
 	try {
 		const body = req.body;
@@ -128,6 +92,108 @@ async function register(req, res) {
 			const message = `otp is not valid.`;
 			return myResponse.response(res, "failed", "", 400, message);
 		}
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function requestOTP(req, res) {
+	try {
+		const body = req.body;
+		totp.options = {
+			digits: 6,
+			step: 60 * 5
+		};
+		const token = totp.generate(process.env.OTP_KEY);
+		const transporter = nodemailer.createTransport({
+			host: 'smtp.gmail.com',
+			port: 465,
+			secure: true,
+			auth: {
+				user: process.env.EMAIL,
+				pass: process.env.PASSWORD
+			}
+		});
+
+		switch (body.requestType) {
+			case 'register':
+				// send mail with defined transport object
+				await transporter.sendMail({
+					from: process.env.EMAIL,
+					to: body.email,
+					subject: 'OTP (One Time Password)',
+					text: `This is shown if you request to register your account at ShopWe. OTP : ${token}`,
+					// html: "<b>OTP PASSWORD</b>", // html body
+				});		
+				break;
+			
+			case 'resetPassword':
+				// send mail with defined transport object
+				await transporter.sendMail({
+					from: process.env.EMAIL,
+					to: body.email,
+					subject: 'OTP (One Time Password)',
+					text: `This is shown if you request to reset your password at ShopWe. OTP : ${token}`,
+					// html: "<b>OTP PASSWORD</b>", // html body
+				});		
+				break;
+		
+			default:
+				break;
+		}
+		
+		const message = {
+			otp: token,
+			note: 'This is for development only!'
+		}
+		return myResponse.response(res, "success", message, 201, "Created!");
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function resetPassword(req, res) {
+	try {
+		const body = req.body;
+		const id = body.id;
+		// validate otp
+		const isValid = totp.check(body.otp, process.env.OTP_KEY);
+		if (isValid) {
+			delete body.otp;
+
+			// data validation
+			const fieldToPatch = Object.keys(body);
+			await validate.validateResetPassword(body, fieldToPatch);
+
+			// checking if data is exists or not
+			const oldData = await usersModel.getDataById(id);
+			if (oldData.length < 1) {
+				const message = `Data with id ${id} not found`;
+				return myResponse.response(res, "failed", "", 404, message);
+			}
+
+			// password hashing
+			const salt = bcrypt.genSaltSync(10);
+			const hash = bcrypt.hashSync(body.password, salt);
+			body.password = hash;
+
+			// update the user data
+			const result = await usersModel.updateData(body, id);
+
+			// if update is success or failed
+			if (result.affectedRows > 0) {
+				return myResponse.response(res, "success", "", 200, "Updated!");
+			} else {
+				const message = `Update data ${data.username} failed `;
+				return myResponse.response(res, "failed", "", 500, message);
+			}
+		} else {
+			const message = `otp is not valid.`;
+			return myResponse.response(res, "failed", "", 400, message);
+		}
+		
 	} catch (error) {
 		console.log(error);
 		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
@@ -211,8 +277,9 @@ async function refresh_token(req, res) {
 }
 
 module.exports = {
-	preRegister,
 	register,
+	resetPassword,
 	login,
-	refresh_token
+	refresh_token,
+	requestOTP
 }
