@@ -18,6 +18,7 @@ const usersRouter = require('./r_users');
 const colorsRouter = require('./r_colors');
 const sizesRouter = require('./r_sizes');
 const brandsRouter = require('./r_brands');
+const categoriesRouter = require('./r_categories');
 
 /**
  * Fire the router
@@ -27,6 +28,7 @@ router.use('/users', validationMiddleware.xssEscape, authMiddleware.verifyJwtTok
 router.use('/colors', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, colorsRouter);
 router.use('/sizes', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, sizesRouter);
 router.use('/brands', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, brandsRouter);
+router.use('/categories', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, categoriesRouter);
 
 
 module.exports = router;
