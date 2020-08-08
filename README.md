@@ -58,7 +58,8 @@ This project was made by team 2, talent academy tech academy batch 16 group 3.
 ## Contributor
 
 -   Adnin Rifandi Sutanto Putra
--   [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />][github] [Adnin Rifandi](https://github.com/rifanid98)
+-   <img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
+    [Adnin Rifandi](https://github.com/rifanid98)
 -   [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/facebook.svg" />][facebook] [Adnin Rifandi](https://https://web.facebook.com/adnin.rifandi754)
 -   [<img align="left" alt="shopwe" width="22px" src="https://"https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin] [Adnin Rifandi](https://www.linkedin.com/in/adnin-rifandi/)
 
