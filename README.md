@@ -8,6 +8,7 @@
 -   [Examples](#examples)
 -   [Built wtih](#features)
 -   [Author](#author)
+-   [Contributor](#contributor)
 -   [License](#license)
 
 ## Prerequisites
@@ -52,7 +53,18 @@
 
 ## Author
 
--   [Adnin Rifandi Sutanto Putra](https://www.linkedin.com/in/adnin-rifandi-s-5a9135129/)
+This project was made by team 2, talent academy tech academy batch 16 group 3.
+
+## Contributor
+
+-   Adnin Rifandi Sutanto Putra
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/github.svg" />](https://github.com/rifanid98)
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/facebook.svg" />](https://https://web.facebook.com/adnin.rifandi754)
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/linkedin.svg" />](https://www.linkedin.com/in/adnin-rifandi/)
+-   Muhammad Rizky
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/github.svg" />](https://github.com/rifanid98)
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/facebook.svg" />](https://https://web.facebook.com/adnin.rifandi754)
+    [<img align="left" alt="codeSTACKr.com" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/linkedin.svg" />](https://www.linkedin.com/in/adnin-rifandi/)
 
 ## License
 
