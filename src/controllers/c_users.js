@@ -201,7 +201,6 @@ async function patchUser(req, res) {
 				deleteImage.delete(myRequest, oldData[0].image);
 			}
 			delete newData.password
-			req.io.emit('refresh', {})
 			return myResponse.response(res, "success", newData, 200, "Updated!");
 		}
 		// if update is failed
@@ -229,7 +228,7 @@ async function patchUser(req, res) {
 async function deleteUser(req, res) {
 	try {
 		const id = req.params.id;
-		const oldData = await getUserById(id);
+		const oldData = await usersModel.getDataById(id);
 		if (oldData.length < 1) {
 			const message = `Data with id ${id} not found`;
 			return myResponse.response(res, "failed", "", 404, message);
