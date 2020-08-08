@@ -87,6 +87,24 @@ async function postUser(req, res) {
 			}
 		}
 
+		// generate access_key
+		const username = body.full_name.split(' ')[0];
+		body.username = username;
+
+		// generate acces_key
+		const name = body.full_name.split(' ');
+		let initialName = '';
+		if (name.length > 1) {
+			initialName += name[0][0];
+			initialName += name[1][0];
+		} else if (name.length === 1) {
+			initialName += name[0][0];
+			initialName += name[0][0];
+		}
+		const randomNumber = Math.floor(Math.random() * 90000) + 10000;
+		const acces_key = `${initialName.toUpperCase()}${randomNumber.toString()}`;
+		body.access_key = acces_key;
+
 		const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(body.password, salt);
 		body.password = hash;
@@ -267,10 +285,37 @@ async function getUserById(req, res) {
 	}
 }
 
+async function getUserOrders(req, res) {
+	try {
+		const id = req.params.id;
+		const result = await usersModel.getDataUserOrders(id);
+
+		return myResponse.response(res, "success", result, 200, 'Ok');
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function getDetailUserOrders(req, res) {
+	try {
+		const user_id = req.params.user_id;
+		const order_id = req.params.order_id
+		const result = await usersModel.getDataDetailUserOrders(user_id, order_id);
+
+		return myResponse.response(res, "success", result, 200, 'Ok');
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
 module.exports = {
 	postUser,
 	patchUser,
 	deleteUser,
 	getUsers,
 	getUserById,
+	getUserOrders,
+	getDetailUserOrders
 }
