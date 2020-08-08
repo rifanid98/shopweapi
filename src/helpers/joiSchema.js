@@ -93,38 +93,74 @@ module.exports = {
 	/**
 	 * Authentication Schemas
 	 */
-	validateRegister: function (userData) {
+	validateRegister: function (register, field = null) {
 		const joiSchema = {
 			username: Joi.string().trim().min(3).required(),
 			full_name: Joi.string().trim().min(3).required(),
-			password: Joi.string().trim().min(3).required(),
 			email: Joi.string().email({ minDomainAtoms: 2 }),
-			role: Joi.number().min(1).required()
+			password: Joi.string().trim().min(3).required(),
+			role: Joi.number().min(1).required(),
+			otp: Joi.number().min(6).required(),
 		};
 
-		return new Promise((resolve, reject) => {
-			const error = Joi.validate(userData, joiSchema);
+		if (!field) {
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(register, joiSchema);
 
-			if (error.error != null) {
-				reject(myJoiError(error));
-			}
-			resolve();
-		});
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		} else {
+			const dynamicSchema = Object.keys(joiSchema)
+				.filter(key => field.includes(key))
+				.reduce((obj, key) => {
+					obj[key] = joiSchema[key];
+					return obj;
+				}, {});
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(register, dynamicSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		}
 	},
-	validateLogin: function (userData) {
+	validateLogin: function (login, field = null) {
 		const joiSchema = {
 			username: Joi.string().trim().min(3).required(),
+			email: Joi.string().email({ minDomainAtoms: 2 }),
 			password: Joi.string().trim().min(3).required()
 		};
 
-		return new Promise((resolve, reject) => {
-			const error = Joi.validate(userData, joiSchema);
+		if (!field) {
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(user, joiSchema);
 
-			if (error.error != null) {
-				reject(myJoiError(error));
-			}
-			resolve();
-		});
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		} else {
+			const dynamicSchema = Object.keys(joiSchema)
+				.filter(key => field.includes(key))
+				.reduce((obj, key) => {
+					obj[key] = joiSchema[key];
+					return obj;
+				}, {});
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(login, dynamicSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		}
 	},
 	validateUsers: function (user, field = null) {
 		const joiSchema = {
