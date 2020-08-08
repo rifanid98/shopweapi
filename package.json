@@ -12,7 +12,7 @@
         "template",
         "api"
     ],
-    "author": "Adnin Rifandi",
+    "author": "Team 2 Arkademy Tech Academy Batch 16.3",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.0.0",
