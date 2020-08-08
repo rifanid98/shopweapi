@@ -16,6 +16,7 @@ const validationMiddleware = require('../middlewares/mdl_validation');
 const authRouter = require('./r_auth');
 const usersRouter = require('./r_users');
 const colorsRouter = require('./r_colors');
+const sizesRouter = require('./r_sizes');
 
 /**
  * Fire the router
@@ -23,5 +24,7 @@ const colorsRouter = require('./r_colors');
 router.use('/auth', validationMiddleware.xssEscape, authRouter);
 router.use('/users', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, usersRouter);
 router.use('/colors', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, colorsRouter);
+router.use('/sizes', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, sizesRouter);
+
 
 module.exports = router;
