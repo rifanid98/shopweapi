@@ -57,7 +57,6 @@ module.exports = {
 			});
 		}
 	},
-
 	validateColors: function (color, field = null) {
 		const joiSchema = {
 			// bookImage: Joi.required(),
@@ -131,10 +130,15 @@ module.exports = {
 		const joiSchema = {
 			username: Joi.string().trim().min(3).required(),
 			full_name: Joi.string().trim().min(3).required(),
-			password: Joi.string().trim().min(3).required(),
+			birth: Joi.date().max('now').required(),
 			email: Joi.string().email({ minDomainAtoms: 2 }),
-			role: Joi.number().min(1).max(3).required()
-
+			password: Joi.string().trim().min(3).required(),
+			phone: Joi.string().trim().min(4).max(15).required(),
+			address: Joi.string().trim().min(3).required(),
+			address_active: Joi.number().min(0).required(),
+			role: Joi.number().min(1).max(3).positive().required(),
+			role: Joi.number().min(1).max(3).required(),
+			access_key: Joi.string().trim().min(3).required()
 		};
 
 		if (!field) {
