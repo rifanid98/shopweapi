@@ -56,6 +56,19 @@ module.exports = {
     result += ')'
     return result;
   },
+  createSQLSETFromObj: function (filters = {}) {
+    let result = "";
+    const length = Object.keys(filters).length - 1;
+    let i = 0;
+    for (key in filters) {
+      const filter = `'${filters[key]}'`;
+      let field = "" + key;
+      result += (i == length) ? `${field} = ${filter}` : `${field}= ${filter}, `;
+      i++;
+    }
+
+    return result;
+  },
   createQuery: function (query, filters, totalData, fields, groups = null, ANDExceptions = null) {
     const search = filters.search;
     const filter = filters.filter;
