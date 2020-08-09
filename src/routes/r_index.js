@@ -22,6 +22,7 @@ const categoriesRouter = require('./r_categories');
 const productsRouter = require('./r_products');
 const paymentsRouter = require('./r_payments');
 const ordersRouter = require('./r_orders');
+const detailOrderRouter = require('./r_detail_order');
 
 /**
  * Fire the router
@@ -35,6 +36,7 @@ router.use('/categories', validationMiddleware.xssEscape, authMiddleware.verifyJ
 router.use('/products', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, productsRouter);
 router.use('/payments', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, paymentsRouter);
 router.use('/orders', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, ordersRouter);
+router.use('/detailorder', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, detailOrderRouter);
 
 
 module.exports = router;
