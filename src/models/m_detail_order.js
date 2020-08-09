@@ -71,6 +71,19 @@ function deleteData(id) {
 /**
  * Another CRUD
  */
+function addDataArray(data) {
+  return new Promise((resolve, reject) => {
+    const values = myHelpers.createSQLVALUEFromObj(data);
+    let sqlQuery = 'INSERT INTO detail_order (order_id, product_id, size, color, price, quantity, sub_total) VALUES ' + values;
+    conn.query(sqlQuery, data, function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
 function getDataById(id) {
   return new Promise((resolve, reject) => {
     const sqlQuery = "SELECT * FROM detail_order WHERE id = ?";
@@ -129,6 +142,7 @@ module.exports = {
   addData,
   updateData,
   deleteData,
+  addDataArray,
   getDataById,
   getDataByName,
   getFieldsName,
