@@ -32,6 +32,27 @@ const deleteImage = require("../helpers/deleteImage");
  */
 async function getProducts(req, res) {
 	try {
+		const getType = req.query.get;
+		switch (getType) {
+			case 'all':
+				delete req.query.get;
+				return getAllProducts(req, res);
+
+			case 'popular':
+				delete req.query.get;
+				return getPopularProducts(req, res);
+		
+			default:
+				return getAllProducts(req, res);
+		}
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function getAllProducts(req, res) {
+	try {
 		const filters = req.query;
 		const fields = await productsModel.getFieldsName();
 		const totalData = await productsModel.getTotalData();
@@ -257,6 +278,26 @@ async function getProductById(req, res) {
 		const result = await productsModel.getDataById(id);
 		
 		return myResponse.response(res, "success", result, 200, 'Ok');
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function getPopularProducts(req, res) {
+	try {
+		const filters = req.query;
+		const fields = await productsModel.getFieldsName();
+		const totalData = await productsModel.getTotalData();
+		const generatedFilters = myHelpers.generateFilters(filters, fields);
+		const result = await productsModel.getPopularData(generatedFilters, totalData, fields);
+		if (result.result > 0) {
+			result.previousPage = req.protocol + '://' + req.get('host') + req.originalUrl;
+			if (req.query.page > 1) result.previousPage = result.previousPage.replace(`page=${req.query.page}`, `page=${parseInt(req.query.page) - 1}`)
+			result.nextPage = req.protocol + '://' + req.get('host') + req.originalUrl;
+			result.nextPage = result.nextPage.replace(`page=${req.query.page}`, `page=${parseInt(req.query.page) + 1}`)
+		}
+		return myResponse.response(res, "success", result, 200, "Ok!");
 	} catch (error) {
 		console.log(error);
 		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
