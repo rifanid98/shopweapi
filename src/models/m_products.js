@@ -25,12 +25,12 @@ async function getData(filters, totalData, fields) {
     categories AS c
   ON 
   c.id = p.category_id
+  WHERE p.quantity <> 0
   ` ;
 
   const ANDExceptions = ['sizes', 'colors', 'c.name'];
   const groups = ['p.id'];
   const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields, groups, ANDExceptions);
-  console.log(query)
   return new Promise((resolve, reject) => {
     conn.query(query.sqlQuery, function (error, result) {
       if (error) {
@@ -41,7 +41,6 @@ async function getData(filters, totalData, fields) {
         totalPage: query.totalPage,
         result
       }
-      result.map(data => delete data.password)
       return Object.keys(filters.pagination).length > 0 ? resolve(newResult) : resolve(result);
     })
   })
@@ -140,6 +139,37 @@ function getTotalData() {
 
 }
 
+async function getPopularData(filters, totalData, fields) {
+  // const sqlQuery = "SELECT * FROM `products` ";
+  const sqlQuery = `
+  SELECT
+    p.*,
+    SUM(do.quantity) AS top_products
+  FROM 
+    detail_order AS do 
+  INNER JOIN 
+    products AS p 
+  ON 
+    p.id=do.product_id
+  WHERE
+    p.quantity <> 0
+  GROUP BY do.product_id 
+  ` ;
+  const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields);
+  return new Promise((resolve, reject) => {
+    conn.query(query.sqlQuery, function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      const newResult = {
+        totalPage: query.totalPage,
+        result
+      }
+      return Object.keys(filters.pagination).length > 0 ? resolve(newResult) : resolve(result);
+    })
+  })
+}
+
 module.exports = {
   getData,
   addData,
@@ -148,5 +178,6 @@ module.exports = {
   getDataById,
   getDataByName,
   getFieldsName,
-  getTotalData
+  getTotalData,
+  getPopularData
 }
