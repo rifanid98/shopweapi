@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 06:09 AM
+-- Generation Time: Aug 09, 2020 at 07:53 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -69,14 +69,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'jackets', '2020-08-08 14:14:00', '2020-08-08 14:14:00'),
-(5, 'trousers', '2020-08-08 14:14:00', '2020-08-08 14:14:00'),
-(9, 'suits', '2020-08-08 14:16:15', '2020-08-08 14:16:15'),
-(13, 'skirts', '2020-08-08 14:16:15', '2020-08-08 14:16:15'),
-(17, 'dresses', '2020-08-08 14:17:08', '2020-08-08 14:17:08'),
-(21, 'shoes', '2020-08-08 14:17:08', '2020-08-08 14:17:08'),
-(25, 'sweaters', '2020-08-08 14:18:19', '2020-08-08 14:18:19'),
-(29, 'waistcoats', '2020-08-08 14:18:19', '2020-08-08 14:18:19');
+(1, 'women', '2020-08-08 14:14:00', '2020-08-09 08:02:39'),
+(5, 'men', '2020-08-08 14:14:00', '2020-08-09 08:02:42'),
+(9, 'boys', '2020-08-08 14:16:15', '2020-08-09 08:02:46'),
+(13, 'girls', '2020-08-08 14:16:15', '2020-08-09 08:02:50');
 
 -- --------------------------------------------------------
 
@@ -90,59 +86,6 @@ CREATE TABLE `colors` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_category`
---
-
-CREATE TABLE `detail_category` (
-  `id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `gender` int(1) NOT NULL COMMENT '0 = male, 1 = female',
-  `age` int(1) NOT NULL COMMENT '0 = young, 1 = old',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `detail_category`
---
-
-INSERT INTO `detail_category` (`id`, `category_id`, `gender`, `age`, `created_at`, `updated_at`) VALUES
-(1, 17, 0, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(2, 17, 0, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(3, 17, 1, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(4, 17, 1, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(5, 1, 0, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(6, 1, 0, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(7, 1, 1, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(8, 1, 1, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(9, 21, 0, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(10, 21, 0, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(11, 21, 1, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(12, 21, 1, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(13, 13, 0, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(14, 13, 0, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(15, 13, 1, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(16, 13, 1, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(17, 9, 0, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(18, 9, 0, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(19, 9, 1, 0, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(20, 9, 1, 1, '2020-08-08 14:45:48', '2020-08-08 14:45:48'),
-(21, 25, 0, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(22, 25, 0, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(23, 25, 1, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(24, 25, 1, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(25, 5, 0, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(26, 5, 0, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(27, 5, 1, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(28, 5, 1, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(29, 29, 0, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(30, 29, 0, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(31, 29, 1, 0, '2020-08-08 14:47:29', '2020-08-08 14:47:29'),
-(32, 29, 1, 1, '2020-08-08 14:47:29', '2020-08-08 14:47:29');
 
 -- --------------------------------------------------------
 
@@ -168,7 +111,7 @@ CREATE TABLE `detail_order` (
 --
 
 INSERT INTO `detail_order` (`id`, `order_id`, `product_id`, `size`, `color`, `price`, `quantity`, `sub_total`, `created_at`, `updated_at`) VALUES
-(21, 1, 1, NULL, NULL, 111, 2, 222, '2020-08-08 15:15:00', '2020-08-08 16:52:41'),
+(21, 1, 1, NULL, NULL, 111, 2, 222, '2020-08-08 15:15:00', '2020-08-09 16:10:51'),
 (22, 1, 2, NULL, NULL, 111, 1, 111, '2020-08-08 15:15:00', '2020-08-08 16:53:02'),
 (23, 1, 3, NULL, NULL, 111, 1, 111, '2020-08-08 15:15:00', '2020-08-08 16:53:05'),
 (24, 9, 8, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
@@ -186,7 +129,18 @@ INSERT INTO `detail_order` (`id`, `order_id`, `product_id`, `size`, `color`, `pr
 (36, 2, 8, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
 (37, 10, 1, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
 (38, 10, 6, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(39, 10, 1, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00');
+(44, 15, 1, 's', 'yellow', 123, 1, 123, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
+(45, 15, 2, 'l', 'blue', 44, 1, 44, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
+(46, 16, 1, 's', 'yellow', 123, 1, 123, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
+(47, 16, 2, 'l', 'blue', 44, 1, 44, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
+(48, 17, 3, 's', 'yellow', 123, 1, 123, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
+(49, 17, 5, 'l', 'blue', 44, 1, 44, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
+(50, 18, 7, 's', 'yellow', 123, 1, 123, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
+(51, 18, 6, 'l', 'blue', 44, 1, 44, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
+(52, 19, 8, 's', 'yellow', 123, 1, 123, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
+(53, 19, 4, 'l', 'blue', 44, 1, 44, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
+(54, 20, 4, 's', 'yellow', 123, 1, 123, '2020-08-09 17:29:46', '2020-08-09 17:29:46'),
+(55, 20, 6, 'l', 'blue', 44, 1, 44, '2020-08-09 17:29:46', '2020-08-09 17:29:46');
 
 -- --------------------------------------------------------
 
@@ -209,7 +163,6 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `tracking_number`, `address`, `payment_id`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL, 5, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
 (2, 1, NULL, NULL, 5, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
 (3, 8, NULL, NULL, 2, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
 (4, 10, NULL, NULL, 3, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
@@ -218,7 +171,13 @@ INSERT INTO `orders` (`id`, `user_id`, `tracking_number`, `address`, `payment_id
 (7, 7, NULL, NULL, 4, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
 (8, 9, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
 (9, 10, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(10, 1, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22');
+(10, 7, 'ASDFAW', 'address_name-penerima-alamat-kota-kode_pos-telepon', 2, '2020-08-08 14:35:22', '2020-08-09 14:18:38'),
+(15, 1, '15769810082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
+(16, 1, '12475810082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
+(17, 1, '14308610082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
+(18, 1, '13202110082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
+(19, 7, '71428710082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
+(20, 9, '97078110082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:29:46', '2020-08-09 17:29:46');
 
 -- --------------------------------------------------------
 
@@ -272,14 +231,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `name`, `category_id`, `colors`, `sizes`, `price`, `image`, `quantity`, `description`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 'armani dress', 17, 'red|yellow|green', 's|m|l', 124, 'default.png', 5, 'description', 3, '2020-08-08 14:54:41', '2020-08-08 16:08:01'),
-(2, 1, 'armani jackets', 1, 'red|green|blue', 's|m|l', 111, 'default.png', 5, 'description', 4, '2020-08-08 14:54:41', '2020-08-08 16:08:01'),
-(3, 4, 'burberry jacket', 1, 'red|blue|pink', 's|m|l', 33, 'default.png', 5, 'description', 5, '2020-08-08 14:56:37', '2020-08-08 16:08:01'),
-(4, 4, 'burberry shoes', 21, 'white|black|grey', 'm|l|xl', 22, 'default.png', 5, 'description', 5, '2020-08-08 14:56:37', '2020-08-08 16:08:01'),
-(5, 6, 'chanel skirts', 13, 'black|orange|blue', 'm|l|xl', 123, 'default.png', 5, 'description', 4, '2020-08-08 14:58:29', '2020-08-08 16:08:01'),
-(6, 6, 'chanel suits', 9, 'purple|white|blue', 's|m|l|xl|xxl', 231, 'default.png', 5, 'description', 5, '2020-08-08 14:58:29', '2020-08-08 16:08:01'),
-(7, 2, 'fendi sweaters', 25, 'red|blue|black', 'm|l|xl', 123, 'default.png', 5, 'description', 3, '2020-08-08 14:59:56', '2020-08-08 16:08:01'),
-(8, 2, 'fendi trousers', 5, 'yellow|black|red', 'm|l|xl', 123, 'default.png', 5, 'description', 5, '2020-08-08 14:59:56', '2020-08-08 16:08:01');
+(1, 1, 'armani dress', 5, 'red|yellow|green', 's|m|l', 124, 'default.png', 3, 'description', 3, '2020-08-08 14:54:41', '2020-08-09 17:24:44'),
+(2, 1, 'armani jackets', 1, 'red|green|blue', 's|m|l', 111, 'default.png', 3, 'description', 4, '2020-08-08 14:54:41', '2020-08-09 17:24:44'),
+(3, 4, 'burberry jacket', 1, 'red|blue|pink', 's|m|l', 33, 'default.png', 4, 'description', 5, '2020-08-08 14:56:37', '2020-08-09 17:26:15'),
+(4, 4, 'burberry shoes', 13, 'white|black|grey', 'm|l|xl', 22, 'default.png', 3, 'description', 5, '2020-08-08 14:56:37', '2020-08-09 17:29:46'),
+(5, 6, 'chanel skirts', 13, 'black|orange|blue', 'm|l|xl', 123, 'default.png', 4, 'description', 4, '2020-08-08 14:58:29', '2020-08-09 17:26:15'),
+(6, 6, 'chanel suits', 9, 'purple|white|blue', 's|m|l|xl|xxl', 231, 'default.png', 3, 'description', 5, '2020-08-08 14:58:29', '2020-08-09 17:29:46'),
+(7, 2, 'fendi sweaters', 9, 'red|blue|black', 'm|l|xl', 123, 'default.png', 4, 'description', 3, '2020-08-08 14:59:56', '2020-08-09 17:26:53'),
+(8, 2, 'fendi trousers', 5, 'yellow|black|red', 'm|l|xl', 123, 'default.png', 4, 'description', 5, '2020-08-08 14:59:56', '2020-08-09 17:28:51');
 
 -- --------------------------------------------------------
 
@@ -363,13 +322,6 @@ ALTER TABLE `colors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `detail_category`
---
-ALTER TABLE `detail_category`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
-
---
 -- Indexes for table `detail_order`
 --
 ALTER TABLE `detail_order`
@@ -434,34 +386,28 @@ ALTER TABLE `colors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `detail_category`
---
-ALTER TABLE `detail_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
 -- AUTO_INCREMENT for table `detail_order`
 --
 ALTER TABLE `detail_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -480,16 +426,9 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `detail_category`
---
-ALTER TABLE `detail_category`
-  ADD CONSTRAINT `detail_category_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
-
---
 -- Constraints for table `detail_order`
 --
 ALTER TABLE `detail_order`
-  ADD CONSTRAINT `detail_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `detail_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
