@@ -252,12 +252,15 @@ module.exports = {
 			});
 		}
 	},
-	validateOrders: function (order, field = null) {
+	validateDetailOrder: function (order, field = null) {
 		const joiSchema = {
-			user_id: Joi.number().min(1).required(),
-			tracking_number: Joi.string().alphanum().trim().min(3).required(),
-			address: Joi.string().trim().min(3).required(),
-			payment_id: Joi.number().min(1).required()
+			order_id: Joi.number().min(1).required(),
+			product_id: Joi.number().min(1).required(),
+			sizes: Joi.string().trim().min(3).required(),
+			colors: Joi.string().trim().min(3).required(),
+			price: Joi.number().min(1).required(),
+			quantity: Joi.number().min(1).required(),
+			sub_total: Joi.number().min(1).required()
 		};
 
 		if (!field) {
