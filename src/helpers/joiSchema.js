@@ -22,7 +22,6 @@ module.exports = {
 	 */
 	validateBooks: function (book, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			title: Joi.string().trim().min(3).required(),
 			description: Joi.string().trim().min(3).required(),
 			author_id: Joi.number().min(1).required(),
@@ -57,10 +56,8 @@ module.exports = {
 			});
 		}
 	},
-
 	validateColors: function (color, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			name: Joi.string().trim().min(3).required(),
 		};
 
@@ -90,10 +87,8 @@ module.exports = {
 			});
 		}
 	},
-
 	validateSizes: function (size, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			name: Joi.string().trim().min(1).required(),
 		};
 
@@ -123,10 +118,8 @@ module.exports = {
 			});
 		}
 	},
-
 	validateBrands: function (brand, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			name: Joi.string().trim().min(2).required(),
 		};
 
@@ -156,13 +149,11 @@ module.exports = {
 			});
 		}
 	},
-
 	validateCategories: function (category, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			name: Joi.string().trim().min(3).required(),
-			gender: Joi.string().trim().min(1).required(),
-			age: Joi.string().trim().min(1).required(),
+			gender: Joi.number().min(0).max(1).required(),
+			age: Joi.number().min(0).max(1).required(),
 		};
 
 		if (!field) {
@@ -191,6 +182,46 @@ module.exports = {
 			});
 		}
 	},
+	validateProducts: function (product, field = null) {
+		const joiSchema = {
+			brand_id: Joi.number().min(1).required(),
+			name: Joi.string().trim().min(3).required(),
+			category_id: Joi.number().min(1).required(),
+			colors: Joi.string().trim().min(2).required(),
+			sizes: Joi.string().trim().min(1).required(),
+			price: Joi.number().min(1).required(),
+			quantity: Joi.number().min(1).required(),
+			description: Joi.string().trim().min(3).required(),
+			rating: Joi.number().min(1).required()
+		};
+
+		if (!field) {
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(product, joiSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		} else {
+			const dynamicSchema = Object.keys(joiSchema)
+				.filter(key => field.includes(key))
+				.reduce((obj, key) => {
+					obj[key] = joiSchema[key];
+					return obj;
+				}, {});
+			return new Promise((resolve, reject) => {
+				const error = Joi.validate(product, dynamicSchema);
+
+				if (error.error != null) {
+					reject(myJoiError(error));
+				}
+				resolve();
+			});
+		}
+	},
+	
 	/**
 	 * Authentication Schemas
 	 */
@@ -320,7 +351,6 @@ module.exports = {
 	},
 	validateResetPassword: function (reset, field = null) {
 		const joiSchema = {
-			// bookImage: Joi.required(),
 			password: Joi.string().alphanum().trim().min(1).required(),
 			otp: Joi.number().min(6).max(6).required(),
 			id: Joi.number().min(1).required()
