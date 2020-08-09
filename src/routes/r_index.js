@@ -20,6 +20,7 @@ const sizesRouter = require('./r_sizes');
 const brandsRouter = require('./r_brands');
 const categoriesRouter = require('./r_categories');
 const productsRouter = require('./r_products');
+const paymentsRouter = require('./r_payments');
 
 /**
  * Fire the router
@@ -31,6 +32,7 @@ router.use('/sizes', validationMiddleware.xssEscape, authMiddleware.verifyJwtTok
 router.use('/brands', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, brandsRouter);
 router.use('/categories', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, categoriesRouter);
 router.use('/products', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, productsRouter);
+router.use('/payments', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, paymentsRouter);
 
 
 module.exports = router;
