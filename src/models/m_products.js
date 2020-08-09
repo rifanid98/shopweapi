@@ -87,8 +87,13 @@ function deleteData(id) {
  */
 function getDataById(id) {
   return new Promise((resolve, reject) => {
-    const sqlQuery = "SELECT * FROM products WHERE id = ?";
-    conn.query(sqlQuery, id, function (error, result) {
+    let sqlQuery = '';
+    if (Array.isArray(id)) {
+      sqlQuery = "SELECT * FROM products WHERE id IN(?)";
+    } else {
+      sqlQuery = "SELECT * FROM products WHERE id = ?";
+    }
+    conn.query(sqlQuery, [id], function (error, result) {
       if (error) {
         reject(error);
       }
@@ -170,6 +175,27 @@ async function getPopularData(filters, totalData, fields) {
   })
 }
 
+function updateDataArray(data, id) {
+  return new Promise((resolve, reject) => {
+    let sqlQuery = '';
+    const datas = data;
+    let i = 0;
+    datas.map((data, index) => {
+      sqlQuery += (i === datas.length)
+        ? `UPDATE products SET ${myHelpers.createSQLSETFromObj(data)} WHERE id = ${id[index]}`
+        : `UPDATE products SET ${myHelpers.createSQLSETFromObj(data)} WHERE id = ${id[index]}; `
+      i++;
+    })
+    // const sqlQuery = "UPDATE products SET ? WHERE id = ?";
+    conn.query(sqlQuery, [data, id], function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
 module.exports = {
   getData,
   addData,
@@ -179,5 +205,6 @@ module.exports = {
   getDataByName,
   getFieldsName,
   getTotalData,
-  getPopularData
+  getPopularData,
+  updateDataArray
 }
