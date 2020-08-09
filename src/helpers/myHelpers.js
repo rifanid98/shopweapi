@@ -69,6 +69,23 @@ module.exports = {
 
     return result;
   },
+  createSQLVALUEFromObj: function (filters = {}) {
+    let result = "";
+    i = 0;
+    filters.map(filter => {
+      let value = '(';
+      const object = Object.keys(filter);
+      let j = 0;
+      object.map(key => {
+        const confirmedKey = typeof (filter[key]) === 'string' ? `'${filter[key]}'`: filter[key] ;
+        value += (j === object.length-1) ? `${confirmedKey})` : `${confirmedKey},`;
+        j++;
+      })
+      result += (i == filters.length - 1) ? value : `${value}, `;
+      i++;
+    })
+    return result;
+  },
   createQuery: function (query, filters, totalData, fields, groups = null, ANDExceptions = null) {
     const search = filters.search;
     const filter = filters.filter;

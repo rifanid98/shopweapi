@@ -4,7 +4,7 @@
  * Load Model
  */
 const ordersModel = require("../models/m_orders");
-// const detailOrdersModel = require("../models/m_detail_orders");
+const detailOrderModel = require("../models/m_detail_order");
 const productsModel = require("../models/m_products");
 
 // custom response
@@ -27,6 +27,7 @@ const deleteImage = require("../helpers/deleteImage");
 
 // moment
 const moment = require('moment');
+const { addData } = require("../models/m_orders");
 
 
 /**
@@ -90,18 +91,35 @@ async function postOrder(req, res) {
 			quantities.push(obj);
 		})
 		// reduce quantity
-			// const updateProducts = await productsModel.updateDataArray(quantities, product_id)
+		const updateProducts = await productsModel.updateDataArray(quantities, product_id)
 		// insert orders
-			// const addOrders = await ordersModel.addData(data);
+		const addOrders = await ordersModel.addData(data);
+		// prepare detail order data
+		const order_id = addOrders.insertId;
+		let detailOrder = [];
+		body.detail_order.map((detail, index) => {
+			detailOrder.push({
+				order_id: order_id,
+				...body.detail_order[index]
+			})
+		})
 		// insert detail order
-		// const addDetailOrder = await
-
-		return;
-
-		const result = await ordersModel.addData(body);
-		if (result.affectedRows > 0) {
-			body.id = result.insertId;
-			return myResponse.response(res, "success", body, 201, "Created!");
+		const addDetailOrder = await detailOrderModel.addDataArray(detailOrder)
+		let updateProductsStatus = { affectedRows: 0 };
+		updateProducts.map(update => {
+			if (update.affectedRows > 0) updateProductsStatus.affectedRows += 1;
+		})
+		if (updateProductsStatus.affectedRows > 0 && addOrders.affectedRows > 0 && addDetailOrder.affectedRows > 0) {
+			const setData = {
+				orders: {
+					id: addOrders.insertId
+				},
+				detail_order: {
+					id: addDetailOrder.insertId,
+					message: `(+${body.detail_order.length}) datas`
+				}
+			}
+			return myResponse.response(res, "success", setData, 201, "Created!");
 		} else {
 			const message = `Add data failed`;
 			return myResponse.response(res, "failed", "", 500, message);
