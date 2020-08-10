@@ -452,7 +452,7 @@ module.exports = {
 	},
 	validateResetPassword: function (reset, field = null) {
 		const joiSchema = {
-			password: Joi.string().alphanum().trim().min(1).required(),
+			password: Joi.string().trim().min(3).required(),
 			otp: Joi.number().min(6).max(6).required(),
 			id: Joi.number().min(1).required()
 		};
