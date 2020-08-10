@@ -187,6 +187,7 @@ module.exports = {
 			brand_id: Joi.number().min(1).required(),
 			name: Joi.string().trim().min(3).required(),
 			category_id: Joi.number().min(1).required(),
+			categories: Joi.string().trim().min(3).required(),
 			colors: Joi.string().trim().min(2).required(),
 			sizes: Joi.string().trim().min(1).required(),
 			price: Joi.number().min(1).required(),
@@ -256,6 +257,7 @@ module.exports = {
 		const joiSchema = {
 			user_id: Joi.number().min(1).required(),
 			address: Joi.string().trim().min(3).required(),
+			tracking_number: Joi.string().alphanum().trim().min(3).required(),
 			payment_id: Joi.number().min(1).required(),
 		};
 
