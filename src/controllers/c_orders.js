@@ -106,9 +106,13 @@ async function postOrder(req, res) {
 		// insert detail order
 		const addDetailOrder = await detailOrderModel.addDataArray(detailOrder)
 		let updateProductsStatus = { affectedRows: 0 };
-		updateProducts.map(update => {
-			if (update.affectedRows > 0) updateProductsStatus.affectedRows += 1;
-		})
+		if (Array.isArray(updateProducts)) {
+			updateProducts.map(update => {
+				if (update.affectedRows > 0) updateProductsStatus.affectedRows += 1;
+			})
+		} else {
+			updateProductsStatus.affectedRows += 1;
+		}
 		if (updateProductsStatus.affectedRows > 0 && addOrders.affectedRows > 0 && addDetailOrder.affectedRows > 0) {
 			const setData = {
 				orders: {
