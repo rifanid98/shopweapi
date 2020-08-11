@@ -83,6 +83,18 @@ function getDataById(id) {
   })
 }
 
+function getDataByEmail(email) {
+  return new Promise((resolve, reject) => {
+    const sqlQuery = "SELECT * FROM users WHERE email = ?";
+    conn.query(sqlQuery, email, function (error, result) {
+      if (error) {
+        reject(error);
+      }
+      resolve(result);
+    })
+  })
+}
+
 function getDataByName(name) {
   return new Promise((resolve, reject) => {
     const sqlQuery = "SELECT * FROM users WHERE username = ?";
@@ -106,13 +118,19 @@ function getDataUserOrders(id) {
       o.address,
       SUM(do.quantity) AS quantity,
       SUM(do.sub_total) AS total,
+      p.id AS payment_id,
+      p.name,
       o.updated_at
     FROM 
       detail_order AS do 
     INNER JOIN 
       orders AS o 
-    ON 
-      o.id=do.order_id
+    ON o.id=do.order_id
+    
+    INNER JOIN 
+      payments AS p
+    ON p.id=o.payment_id
+    
     WHERE 
       o.user_id = ?
     GROUP BY 
@@ -218,6 +236,7 @@ module.exports = {
   updateData,
   deleteData,
   getDataById,
+  getDataByEmail,
   getDataByName,
   getDataUserOrders,
   getDataDetailUserOrders,
