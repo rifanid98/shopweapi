@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 10, 2020 at 06:01 PM
+-- Generation Time: Aug 11, 2020 at 12:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopwe`
 --
-
+CREATE DATABASE IF NOT EXISTS `shopwe`;
+USE `shopwe`;
 -- --------------------------------------------------------
 
 --
@@ -140,7 +141,7 @@ INSERT INTO `detail_order` (`id`, `order_id`, `product_id`, `size`, `color`, `pr
 (17, 8, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:28:22', '2020-08-10 15:28:22'),
 (18, 9, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:29:40', '2020-08-10 15:29:40'),
 (19, 10, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:30:29', '2020-08-10 15:30:29'),
-(20, 11, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:31:21', '2020-08-10 15:31:21');
+(20, 11, 5, 's', '#FFFFFF', 32, 2, 64, '2020-08-10 15:31:21', '2020-08-11 06:38:12');
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `name`, `category_id`, `categories`, `colors`, `sizes`, `price`, `image`, `quantity`, `description`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 'erka', 1, 'men|women|boys', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 4, 'description', 3, '2020-08-10 14:45:09', '2020-08-10 14:54:40'),
+(1, 1, 'erka', 1, 'men|women|boys', 'red|blue|#000000|#FFFFFF', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 4, 'description', 3, '2020-08-10 14:45:09', '2020-08-11 06:47:54'),
 (2, 2, 'ultralight jacket', 1, 'men|women|boys', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:46:45', '2020-08-10 14:55:31'),
 (3, 3, 'pote', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:47:08', '2020-08-10 14:56:04'),
 (4, 3, 'XABA x RK', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', -1, 'description', 3, '2020-08-10 14:47:43', '2020-08-10 14:57:40'),
@@ -297,7 +298,8 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birth`, `email`, `password`
 (2, 'staff', 'staff manager', '1998-11-21', 'adninsijawa.staff@gmail.com', '$2b$10$ftjzv79NgMdvB/uN3Mhh0O9WmHYb/klbO6Q4eu.GWts9Z3..9qBPm', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'SM18015', '2020-08-10 10:14:16', '2020-08-10 10:15:03'),
 (3, 'user', 'user manager', '1998-11-21', 'adninsijawa.user@gmail.com', '$2b$10$nCD9jtVTZKgxSMlYdbUGjO/pQ2rxq5fxOmWTYR8848dDqbsctKCKG', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'UM42836', '2020-08-10 10:14:45', '2020-08-10 10:14:45'),
 (4, 'client', 'client manager', '1998-11-21', 'adninsijawa.client@gmail.com', '$2b$10$c50GPRHoq8lUJDfNgXpJI.u5w.yFOS9kfijz72FA9vtVgnoqpQvzS', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'CM48629', '2020-08-10 10:15:21', '2020-08-10 10:15:21'),
-(6, 'user_test', 'user_test', '2020-08-10', 'adninsijawa@usertest.com', '$2b$10$FMR0utwuWLBe7kjG1Oc7CuTC3XPHDAVxxETkn.asOWLfxg/7PRhmG', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'UU82807', '2020-08-10 10:22:53', '2020-08-10 10:25:24');
+(6, 'user_test', 'user_test', '2020-08-10', 'adninsijawa@usertest.com', '$2b$10$FMR0utwuWLBe7kjG1Oc7CuTC3XPHDAVxxETkn.asOWLfxg/7PRhmG', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'UU82807', '2020-08-10 10:22:53', '2020-08-10 10:25:24'),
+(7, 'testing', 'testing', '2020-08-11', 'adninsijawa@testing.com', '$2b$10$YcOdzPmm.R/EHtnDGrEitebDADiS.ulU9RyuT67i0BJOeA494Gqme', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'TT85573', '2020-08-11 06:28:43', '2020-08-11 08:23:22');
 
 --
 -- Indexes for dumped tables
@@ -419,7 +421,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
