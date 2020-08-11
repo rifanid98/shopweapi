@@ -25,7 +25,7 @@ async function getData(filters, totalData, fields) {
     categories AS c
   ON 
   c.id = p.category_id
-  WHERE p.quantity <> 0
+  AND p.quantity <> 0
   ` ;
 
   const ANDExceptions = ['sizes', 'colors', 'c.name'];
