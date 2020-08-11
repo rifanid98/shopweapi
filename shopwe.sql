@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 07:53 PM
+-- Generation Time: Aug 10, 2020 at 06:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -20,8 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopwe`
 --
-CREATE DATABASE IF NOT EXISTS `shopwe`;
-USE `shopwe`;
+
 -- --------------------------------------------------------
 
 --
@@ -40,16 +39,16 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'armani', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(2, 'fendi', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(3, 'house of versace', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(4, 'burberry', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(5, 'ralph lauren', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(6, 'chanel', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(7, 'prada', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(8, 'hermes', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(9, 'gucci', '2020-08-08 14:08:05', '2020-08-08 14:08:05'),
-(10, 'louis vuitton', '2020-08-08 14:08:05', '2020-08-08 14:08:05');
+(1, 'Pull & Bear', '2020-08-10 14:10:46', '2020-08-10 14:10:46'),
+(2, 'armani', '2020-08-10 14:11:56', '2020-08-10 14:11:56'),
+(3, 'fendi', '2020-08-10 14:12:01', '2020-08-10 14:12:24'),
+(4, 'house of versace', '2020-08-10 14:12:47', '2020-08-10 14:12:47'),
+(5, 'burberry', '2020-08-10 14:12:55', '2020-08-10 14:12:55'),
+(6, 'ralph lauren', '2020-08-10 14:13:01', '2020-08-10 14:13:01'),
+(7, 'chanel', '2020-08-10 14:13:06', '2020-08-10 14:13:06'),
+(8, 'prada', '2020-08-10 14:13:11', '2020-08-10 14:13:11'),
+(9, 'hermes', '2020-08-10 14:13:16', '2020-08-10 14:13:16'),
+(10, 'gucci', '2020-08-10 14:13:22', '2020-08-10 14:13:22');
 
 -- --------------------------------------------------------
 
@@ -69,10 +68,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'women', '2020-08-08 14:14:00', '2020-08-09 08:02:39'),
-(5, 'men', '2020-08-08 14:14:00', '2020-08-09 08:02:42'),
-(9, 'boys', '2020-08-08 14:16:15', '2020-08-09 08:02:46'),
-(13, 'girls', '2020-08-08 14:16:15', '2020-08-09 08:02:50');
+(1, 'men', '2020-08-10 14:33:13', '2020-08-10 14:33:13'),
+(2, 'women', '2020-08-10 14:33:16', '2020-08-10 14:33:16'),
+(3, 'boys', '2020-08-10 14:33:20', '2020-08-10 14:33:20'),
+(4, 'girls', '2020-08-10 14:33:24', '2020-08-10 14:33:24');
 
 -- --------------------------------------------------------
 
@@ -86,6 +85,18 @@ CREATE TABLE `colors` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `colors`
+--
+
+INSERT INTO `colors` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'red', '2020-08-10 14:14:34', '2020-08-10 14:14:34'),
+(2, 'yellow', '2020-08-10 14:14:44', '2020-08-10 14:14:44'),
+(3, 'blue', '2020-08-10 14:14:51', '2020-08-10 14:14:51'),
+(4, 'purple', '2020-08-10 14:15:01', '2020-08-10 14:15:01'),
+(5, 'orange', '2020-08-10 14:15:04', '2020-08-10 14:15:04'),
+(6, 'pink', '2020-08-10 14:15:08', '2020-08-10 14:15:08');
 
 -- --------------------------------------------------------
 
@@ -111,36 +122,25 @@ CREATE TABLE `detail_order` (
 --
 
 INSERT INTO `detail_order` (`id`, `order_id`, `product_id`, `size`, `color`, `price`, `quantity`, `sub_total`, `created_at`, `updated_at`) VALUES
-(21, 1, 1, NULL, NULL, 111, 2, 222, '2020-08-08 15:15:00', '2020-08-09 16:10:51'),
-(22, 1, 2, NULL, NULL, 111, 1, 111, '2020-08-08 15:15:00', '2020-08-08 16:53:02'),
-(23, 1, 3, NULL, NULL, 111, 1, 111, '2020-08-08 15:15:00', '2020-08-08 16:53:05'),
-(24, 9, 8, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(25, 9, 7, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(26, 8, 5, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(27, 8, 2, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(28, 7, 6, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(29, 7, 7, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(30, 7, 1, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(31, 6, 3, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(32, 5, 8, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(33, 4, 2, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(34, 3, 2, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(35, 2, 6, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(36, 2, 8, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(37, 10, 1, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(38, 10, 6, NULL, NULL, 1, 1, 111, '2020-08-08 15:15:00', '2020-08-08 15:15:00'),
-(44, 15, 1, 's', 'yellow', 123, 1, 123, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
-(45, 15, 2, 'l', 'blue', 44, 1, 44, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
-(46, 16, 1, 's', 'yellow', 123, 1, 123, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
-(47, 16, 2, 'l', 'blue', 44, 1, 44, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
-(48, 17, 3, 's', 'yellow', 123, 1, 123, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
-(49, 17, 5, 'l', 'blue', 44, 1, 44, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
-(50, 18, 7, 's', 'yellow', 123, 1, 123, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
-(51, 18, 6, 'l', 'blue', 44, 1, 44, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
-(52, 19, 8, 's', 'yellow', 123, 1, 123, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
-(53, 19, 4, 'l', 'blue', 44, 1, 44, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
-(54, 20, 4, 's', 'yellow', 123, 1, 123, '2020-08-09 17:29:46', '2020-08-09 17:29:46'),
-(55, 20, 6, 'l', 'blue', 44, 1, 44, '2020-08-09 17:29:46', '2020-08-09 17:29:46');
+(1, 1, 1, 's', 'yellow', 123, 1, 123, '2020-08-10 14:54:40', '2020-08-10 14:54:40'),
+(2, 1, 2, 'l', 'blue', 44, 1, 44, '2020-08-10 14:54:40', '2020-08-10 15:11:21'),
+(3, 2, 2, 's', 'yellow', 22, 2, 44, '2020-08-10 14:55:32', '2020-08-10 14:55:32'),
+(4, 2, 3, 'l', 'blue', 99, 1, 99, '2020-08-10 14:55:32', '2020-08-10 14:55:32'),
+(5, 3, 3, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
+(6, 3, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
+(7, 4, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:23', '2020-08-10 14:56:23'),
+(8, 5, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
+(9, 5, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
+(10, 5, 6, 'l', 'blue', 33, 1, 33, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
+(11, 6, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
+(12, 6, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
+(13, 6, 6, 'l', 'blue', 33, 1, 33, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
+(14, 7, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:57:41', '2020-08-10 14:57:41'),
+(15, 7, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:57:41', '2020-08-10 14:57:41'),
+(17, 8, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:28:22', '2020-08-10 15:28:22'),
+(18, 9, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:29:40', '2020-08-10 15:29:40'),
+(19, 10, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:30:29', '2020-08-10 15:30:29'),
+(20, 11, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:31:21', '2020-08-10 15:31:21');
 
 -- --------------------------------------------------------
 
@@ -163,21 +163,16 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `tracking_number`, `address`, `payment_id`, `created_at`, `updated_at`) VALUES
-(2, 1, NULL, NULL, 5, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(3, 8, NULL, NULL, 2, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(4, 10, NULL, NULL, 3, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(5, 7, NULL, NULL, 4, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(6, 9, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(7, 7, NULL, NULL, 4, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(8, 9, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(9, 10, NULL, NULL, 1, '2020-08-08 14:35:22', '2020-08-08 14:35:22'),
-(10, 7, 'ASDFAW', 'address_name-penerima-alamat-kota-kode_pos-telepon', 2, '2020-08-08 14:35:22', '2020-08-09 14:18:38'),
-(15, 1, '15769810082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:20:31', '2020-08-09 17:20:31'),
-(16, 1, '12475810082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:24:44', '2020-08-09 17:24:44'),
-(17, 1, '14308610082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:26:15', '2020-08-09 17:26:15'),
-(18, 1, '13202110082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:26:54', '2020-08-09 17:26:54'),
-(19, 7, '71428710082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:28:52', '2020-08-09 17:28:52'),
-(20, 9, '97078110082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-09 17:29:46', '2020-08-09 17:29:46');
+(1, 1, '15028910082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-10 14:54:40', '2020-08-10 14:54:40'),
+(2, 1, '15895410082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-10 14:55:31', '2020-08-10 14:55:31'),
+(3, 2, '26011410082020', 'home-user-dramaga-bogor-16620-089606415122', 3, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
+(4, 3, '37795910082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:56:23', '2020-08-10 14:56:23'),
+(5, 3, '36193510082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
+(6, 3, '31154810082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
+(8, 3, '38438110082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:28:22', '2020-08-10 15:28:22'),
+(9, 3, '39396410082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:29:40', '2020-08-10 15:29:40'),
+(10, 3, '31307810082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:30:29', '2020-08-10 15:30:29'),
+(11, 3, '34395710082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:31:21', '2020-08-10 15:31:21');
 
 -- --------------------------------------------------------
 
@@ -198,11 +193,12 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `name`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'OVO', '', '2020-08-08 14:24:54', '2020-08-08 14:24:54'),
-(2, 'GoPay', '', '2020-08-08 14:24:54', '2020-08-08 14:24:54'),
-(3, 'Post Indonesia', '', '2020-08-08 14:24:54', '2020-08-08 14:24:54'),
-(4, 'Indomart', '', '2020-08-08 14:24:54', '2020-08-08 14:24:54'),
-(5, 'Alfamart', '', '2020-08-08 14:24:54', '2020-08-08 14:24:54');
+(1, 'alfamart', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:27:20', '2020-08-10 14:27:20'),
+(2, 'indomart', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:27:29', '2020-08-10 14:27:29'),
+(3, 'pos indonesia', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:27:43', '2020-08-10 14:27:43'),
+(4, 'ovo', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:27:50', '2020-08-10 14:27:50'),
+(5, 'gopay', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:27:57', '2020-08-10 14:27:57'),
+(6, 'dana', 'http://192.168.42.15:3000/shopwe/images/payment.jpg', '2020-08-10 14:28:36', '2020-08-10 14:28:36');
 
 -- --------------------------------------------------------
 
@@ -215,6 +211,7 @@ CREATE TABLE `products` (
   `brand_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `category_id` int(11) NOT NULL,
+  `categories` varchar(255) DEFAULT NULL,
   `colors` varchar(150) NOT NULL,
   `sizes` varchar(20) NOT NULL,
   `price` int(10) NOT NULL,
@@ -230,15 +227,18 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `brand_id`, `name`, `category_id`, `colors`, `sizes`, `price`, `image`, `quantity`, `description`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 'armani dress', 5, 'red|yellow|green', 's|m|l', 124, 'default.png', 3, 'description', 3, '2020-08-08 14:54:41', '2020-08-09 17:24:44'),
-(2, 1, 'armani jackets', 1, 'red|green|blue', 's|m|l', 111, 'default.png', 3, 'description', 4, '2020-08-08 14:54:41', '2020-08-09 17:24:44'),
-(3, 4, 'burberry jacket', 1, 'red|blue|pink', 's|m|l', 33, 'default.png', 4, 'description', 5, '2020-08-08 14:56:37', '2020-08-09 17:26:15'),
-(4, 4, 'burberry shoes', 13, 'white|black|grey', 'm|l|xl', 22, 'default.png', 3, 'description', 5, '2020-08-08 14:56:37', '2020-08-09 17:29:46'),
-(5, 6, 'chanel skirts', 13, 'black|orange|blue', 'm|l|xl', 123, 'default.png', 4, 'description', 4, '2020-08-08 14:58:29', '2020-08-09 17:26:15'),
-(6, 6, 'chanel suits', 9, 'purple|white|blue', 's|m|l|xl|xxl', 231, 'default.png', 3, 'description', 5, '2020-08-08 14:58:29', '2020-08-09 17:29:46'),
-(7, 2, 'fendi sweaters', 9, 'red|blue|black', 'm|l|xl', 123, 'default.png', 4, 'description', 3, '2020-08-08 14:59:56', '2020-08-09 17:26:53'),
-(8, 2, 'fendi trousers', 5, 'yellow|black|red', 'm|l|xl', 123, 'default.png', 4, 'description', 5, '2020-08-08 14:59:56', '2020-08-09 17:28:51');
+INSERT INTO `products` (`id`, `brand_id`, `name`, `category_id`, `categories`, `colors`, `sizes`, `price`, `image`, `quantity`, `description`, `rating`, `created_at`, `updated_at`) VALUES
+(1, 1, 'erka', 1, 'men|women|boys', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 4, 'description', 3, '2020-08-10 14:45:09', '2020-08-10 14:54:40'),
+(2, 2, 'ultralight jacket', 1, 'men|women|boys', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:46:45', '2020-08-10 14:55:31'),
+(3, 3, 'pote', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:47:08', '2020-08-10 14:56:04'),
+(4, 3, 'XABA x RK', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', -1, 'description', 3, '2020-08-10 14:47:43', '2020-08-10 14:57:40'),
+(5, 4, 'leon jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', -9, 'description', 3, '2020-08-10 14:47:59', '2020-08-10 15:31:21'),
+(6, 5, 'cameo jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:48:10', '2020-08-10 14:57:41'),
+(7, 6, 'polo', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:20', '2020-08-10 14:48:20'),
+(8, 7, 'dom jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:34', '2020-08-10 14:48:34'),
+(9, 8, 'kolar jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:47', '2020-08-10 14:48:47'),
+(10, 9, 'viral jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:58', '2020-08-10 14:48:58'),
+(11, 10, 'bomber jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:49:44', '2020-08-10 14:49:44');
 
 -- --------------------------------------------------------
 
@@ -258,12 +258,12 @@ CREATE TABLE `sizes` (
 --
 
 INSERT INTO `sizes` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'xs', '2020-08-08 04:51:41', '2020-08-08 14:03:14'),
-(2, 's', '2020-08-08 14:04:19', '2020-08-08 14:04:19'),
-(3, 'm', '2020-08-08 14:04:19', '2020-08-08 14:04:19'),
-(4, 'l', '2020-08-08 14:04:19', '2020-08-08 14:04:19'),
-(5, 'xl', '2020-08-08 14:04:19', '2020-08-08 14:04:19'),
-(6, 'xxl', '2020-08-08 14:04:19', '2020-08-08 14:04:19');
+(1, 'xs', '2020-08-10 14:24:07', '2020-08-10 14:24:20'),
+(2, 's', '2020-08-10 14:24:26', '2020-08-10 14:24:26'),
+(3, 'm', '2020-08-10 14:24:29', '2020-08-10 14:24:29'),
+(4, 'l', '2020-08-10 14:24:32', '2020-08-10 14:24:32'),
+(5, 'xl', '2020-08-10 14:24:37', '2020-08-10 14:24:37'),
+(6, 'xxl', '2020-08-10 14:24:42', '2020-08-10 14:24:42');
 
 -- --------------------------------------------------------
 
@@ -293,11 +293,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `full_name`, `birth`, `email`, `password`, `phone`, `image`, `address`, `address_active`, `role`, `access_key`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin admin', '2020-08-08', 'admin@admin.com', '$2b$10$GkG9XeGne3Te9JETETsZJ.n7.W1NMM9qK9vd31S3S.YA/PrU/uNXO', '089606415122', 'http://192.168.42.15:3000/shopwe/images/avatar.png', 'address_name-penerima-alamat-kota-kode_pos-telepon|name-penerima-alamat-kota-kode_pos-telepon-negara|address_name-penerima-alamat-kota-kode_pos-telepon|name-penerima-alamat-kota-kode_pos-telepon-negara|', 0, 1, 'admin', '2020-08-08 04:19:48', '2020-08-08 07:16:36'),
-(7, 'rifandi', 'rifandi ganteng', '2020-08-08', 'adninsijawa.medsos@gmail.com', '$2b$10$Vh5RKaFYjKKwg4veu3qsse/zIZBCfA7HGeF7j4x4ofMsABD0ujAnG', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'RG61470', '2020-08-08 11:12:56', '2020-08-08 13:39:50'),
-(8, 'adnin', 'adnin ganteng', '2020-08-08', 'adnin@shopwe.com', '$2b$10$TeB6466esHEIj8dJBg71tuW6ZjqhAbWn1dgbR6Ae3MQxFobiF6I/K', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'AG40093', '2020-08-08 14:30:34', '2020-08-08 14:30:34'),
-(9, 'sutanto', 'sutanto ganteng', '2020-08-08', 'sutanto@shopwe.com', '$2b$10$4elgYLajPAeKeJ6k00ylSOvm2pibszDX7tqJVHM/ZgVtdm5eulFy.', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'SG36569', '2020-08-08 14:30:53', '2020-08-08 14:30:53'),
-(10, 'putra', 'putra ganteng', '2020-08-08', 'putra@shopwe.com', '$2b$10$qz2JWCDkdd2E9vqV.k87Iuku4cChMpsd7204d5m2iEShltYzI.bdC', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'PG16568', '2020-08-08 14:31:04', '2020-08-08 14:31:04');
+(1, 'admin', 'admin manager', '1998-11-21', 'adninsijawa.medsos@gmail.com', '$2b$10$FXWXM2Gq3LHPy85Z9DTjRuVCFaU0ihLqJzXmJqPwjwUt1BjEDIOiG', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'AM80356', '2020-08-10 10:13:35', '2020-08-10 10:13:35'),
+(2, 'staff', 'staff manager', '1998-11-21', 'adninsijawa.staff@gmail.com', '$2b$10$ftjzv79NgMdvB/uN3Mhh0O9WmHYb/klbO6Q4eu.GWts9Z3..9qBPm', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'SM18015', '2020-08-10 10:14:16', '2020-08-10 10:15:03'),
+(3, 'user', 'user manager', '1998-11-21', 'adninsijawa.user@gmail.com', '$2b$10$nCD9jtVTZKgxSMlYdbUGjO/pQ2rxq5fxOmWTYR8848dDqbsctKCKG', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'UM42836', '2020-08-10 10:14:45', '2020-08-10 10:14:45'),
+(4, 'client', 'client manager', '1998-11-21', 'adninsijawa.client@gmail.com', '$2b$10$c50GPRHoq8lUJDfNgXpJI.u5w.yFOS9kfijz72FA9vtVgnoqpQvzS', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'CM48629', '2020-08-10 10:15:21', '2020-08-10 10:15:21'),
+(6, 'user_test', 'user_test', '2020-08-10', 'adninsijawa@usertest.com', '$2b$10$FMR0utwuWLBe7kjG1Oc7CuTC3XPHDAVxxETkn.asOWLfxg/7PRhmG', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'UU82807', '2020-08-10 10:22:53', '2020-08-10 10:25:24');
 
 --
 -- Indexes for dumped tables
@@ -371,55 +371,55 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `colors`
 --
 ALTER TABLE `colors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `detail_order`
 --
 ALTER TABLE `detail_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `sizes`
 --
 ALTER TABLE `sizes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -429,21 +429,21 @@ ALTER TABLE `users`
 -- Constraints for table `detail_order`
 --
 ALTER TABLE `detail_order`
-  ADD CONSTRAINT `detail_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `detail_order_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
