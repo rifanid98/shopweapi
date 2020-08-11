@@ -154,46 +154,86 @@ async function requestOTP(req, res) {
 	}
 }
 
+async function confirmOTP(req, res) {
+	try {
+		const body = req.body;
+
+		if (body.otp) {
+			// validate otp
+			const isValid = totp.check(body.otp, process.env.OTP_KEY);
+			if (!isValid) {
+				const message = `otp is not valid.`;
+				return myResponse.response(res, "failed", "", 400, message);
+			}
+			const message = `otp is valid `;
+			return myResponse.response(res, "success", "", 200, message);
+		} else {
+			const message = `otp doesn't exists! `;
+			return myResponse.response(res, "success", "", 404, message);
+		}
+
+		
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
 async function resetPassword(req, res) {
 	try {
 		const body = req.body;
-		const id = body.id;
-		// validate otp
-		const isValid = totp.check(body.otp, process.env.OTP_KEY);
-		if (isValid) {
+		let id = 0;
+
+		if (body.otp) {
+			// validate otp
+			const isValid = totp.check(body.otp, process.env.OTP_KEY);
+			if (!isValid) {
+				const message = `otp is not valid.`;
+				return myResponse.response(res, "failed", "", 400, message);
+			}
+
 			delete body.otp;
+		}
 
-			// data validation
-			const fieldToPatch = Object.keys(body);
-			await validate.validateResetPassword(body, fieldToPatch);
+		// data validation
+		const fieldToPatch = Object.keys(body);
+		await validate.validateResetPassword(body, fieldToPatch);
 
+		if (body.email) {
 			// checking if data is exists or not
-			const oldData = await usersModel.getDataById(id);
+			const oldData = await usersModel.getDataByEmail(body.email);
 			if (oldData.length < 1) {
-				const message = `Data with id ${id} not found`;
+				const message = `Data with email ${id} not found`;
 				return myResponse.response(res, "failed", "", 404, message);
 			}
-
-			// password hashing
-			const salt = bcrypt.genSaltSync(10);
-			const hash = bcrypt.hashSync(body.password, salt);
-			body.password = hash;
-
-			// update the user data
-			const result = await usersModel.updateData(body, id);
-
-			// if update is success or failed
-			if (result.affectedRows > 0) {
-				return myResponse.response(res, "success", "", 200, "Updated!");
-			} else {
-				const message = `Update data ${data.username} failed `;
-				return myResponse.response(res, "failed", "", 500, message);
-			}
-		} else {
-			const message = `otp is not valid.`;
-			return myResponse.response(res, "failed", "", 400, message);
+			id = oldData[0].id;
 		}
-		
+
+		if (body.id) {
+			// checking if data is exists or not
+			const oldData = await usersModel.getDataById(body.id);
+			if (oldData.length < 1) {
+				const message = `Data with id ${body.id} not found`;
+				return myResponse.response(res, "failed", "", 404, message);
+			}
+			id = body.id;
+		}
+
+		// password hashing
+		const salt = bcrypt.genSaltSync(10);
+		const hash = bcrypt.hashSync(body.password, salt);
+		body.password = hash;
+
+		// update the user data
+		const result = await usersModel.updateData(body, id);
+
+		// if update is success or failed
+		if (result.affectedRows > 0) {
+			return myResponse.response(res, "success", "", 200, "Updated!");
+		} else {
+			const message = `Update data ${data.username} failed `;
+			return myResponse.response(res, "failed", "", 500, message);
+		}
 	} catch (error) {
 		console.log(error);
 		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
@@ -281,5 +321,6 @@ module.exports = {
 	resetPassword,
 	login,
 	refresh_token,
-	requestOTP
+	requestOTP,
+	confirmOTP
 }
