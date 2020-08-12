@@ -26,11 +26,11 @@ const productsController = require('../controllers/c_products');
 // Get All Products
 router.get('/', productsController.getProducts);
 // Post a Product
-router.post('/', authMiddleware.checkRole([2, 1]), upload.single('image'), productsController.postProduct);
+router.post('/', authMiddleware.verifyJwtToken, authMiddleware.checkRole([2, 1]), upload.single('image'), productsController.postProduct);
 // Patch a Product
-router.patch('/:id', authMiddleware.checkRole([2, 1]), upload.single('image'), productsController.patchProduct);
+router.patch('/:id', authMiddleware.verifyJwtToken, authMiddleware.checkRole([2, 1]), upload.single('image'), productsController.patchProduct);
 // Delete a Product
-router.delete('/:id', authMiddleware.checkRole([1]), productsController.deleteProduct);
+router.delete('/:id', authMiddleware.verifyJwtToken, authMiddleware.checkRole([1]), productsController.deleteProduct);
 
 /**
  * Other CRUD
