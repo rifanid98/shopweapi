@@ -3,7 +3,7 @@
  * .
  * Load Model
  */
-const usersModel = require("../models/m_users");
+const productsModel = require("../models/m_products");
 
 // custom response
 const myResponse = require("../helpers/myResponse");
@@ -30,13 +30,34 @@ const deleteImage = require("../helpers/deleteImage");
 /**
  * CRUD
  */
-async function getUsers(req, res) {
+async function getProducts(req, res) {
+	try {
+		const getType = req.query.get;
+		switch (getType) {
+			case 'all':
+				delete req.query.get;
+				return getAllProducts(req, res);
+
+			case 'popular':
+				delete req.query.get;
+				return getPopularProducts(req, res);
+		
+			default:
+				return getAllProducts(req, res);
+		}
+	} catch (error) {
+		console.log(error);
+		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
+	}
+}
+
+async function getAllProducts(req, res) {
 	try {
 		const filters = req.query;
-		const fields = await usersModel.getFieldsName();
-		const totalData = await usersModel.getTotalData();
+		const fields = await productsModel.getFieldsName();
+		const totalData = await productsModel.getTotalData();
 		const generatedFilters = myHelpers.generateFilters(filters, fields);
-		const result = await usersModel.getData(generatedFilters, totalData, fields);
+		const result = await productsModel.getData(generatedFilters, totalData, fields);
 		if (result.result > 0) {
 			result.previousPage = req.protocol + '://' + req.get('host') + req.originalUrl;
 			if (req.query.page > 1) result.previousPage = result.previousPage.replace(`page=${req.query.page}`, `page=${parseInt(req.query.page) - 1}`)
@@ -50,30 +71,30 @@ async function getUsers(req, res) {
 	}
 }
 
-async function postUser(req, res) {
+async function postProduct(req, res) {
 	try {
 		// Joi validation
 		const fieldToPatch = Object.keys(req.body);
-		await validate.validateUsers(req.body, fieldToPatch);
+		await validate.validateProducts(req.body, fieldToPatch);
 
 		const body = req.body;
-		const checkUser = await usersModel.getDataByName(body.username);
+		const checkProduct = await productsModel.getDataByName(body.name);
 
-		if (checkUser.length > 0) {
+		if (checkProduct.length > 0) {
 			if (req.file) {
 				// delete new image when duplicated data
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
 				deleteImage.delete(myRequest, req.file.filename);
 			}
 
-			const message = `Duplicate data ${body.username}`;
+			const message = `Duplicate data ${body.name}`;
 			return myResponse.response(res, "failed", "", 409, message);
 		}
 
 		if (req.file === undefined) {
 			// set default file when no image to upload
-			body.image = `avatar.png`;
-			// body.image = `${config.imageUrlPath(req)}avatar.png`;
+			body.image = `default.png`;
+			// body.image = `${config.imageUrlPath(req)}default.png`;
 		} else {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				// get the image name and set into data
@@ -89,29 +110,7 @@ async function postUser(req, res) {
 			}
 		}
 
-		// generate access_key
-		const username = body.full_name.split(' ')[0];
-		body.username = username;
-
-		// generate acces_key
-		const name = body.full_name.split(' ');
-		let initialName = '';
-		if (name.length > 1) {
-			initialName += name[0][0];
-			initialName += name[1][0];
-		} else if (name.length === 1) {
-			initialName += name[0][0];
-			initialName += name[0][0];
-		}
-		const randomNumber = Math.floor(Math.random() * 90000) + 10000;
-		const acces_key = `${initialName.toUpperCase()}${randomNumber.toString()}`;
-		body.access_key = acces_key;
-
-		const salt = bcrypt.genSaltSync(10);
-		const hash = bcrypt.hashSync(body.password, salt);
-		body.password = hash;
-
-		const result = await usersModel.addData(body);
+		const result = await productsModel.addData(body);
 		if (result.affectedRows > 0) {
 			body.id = result.insertId;
 			delete body.password
@@ -139,15 +138,15 @@ async function postUser(req, res) {
 	}
 }
 
-async function patchUser(req, res) {
+async function patchProduct(req, res) {
 	try {
 		// get data to validate
 		const fieldToPatch = Object.keys(req.body);
-		await validate.validateUsers(req.body, fieldToPatch);
+		await validate.validateProducts(req.body, fieldToPatch);
 
 		// checking if data is exists or not
 		const id = req.params.id;
-		const oldData = await usersModel.getDataById(id);
+		const oldData = await productsModel.getDataById(id);
 		if (oldData.length < 1) {
 			// delete new image when duplicated data
 			const myRequest = { protocol: req.protocol, host: req.get('host') }
@@ -157,18 +156,18 @@ async function patchUser(req, res) {
 			return myResponse.response(res, "failed", "", 404, message);
 		}
 
-		// checking if user want to change the username of user
+		// checking if product want to change the name of product
 		const body = req.body;
-		if (body.username !== undefined) {
-			const checkUser = await usersModel.getDataByName(body.username);
-			if (checkUser.length > 0) {
+		if (body.name !== undefined) {
+			const checkProduct = await productsModel.getDataByName(body.name);
+			if (checkProduct.length > 0) {
 				if (req.file) {
 					// delete new image when duplicated data
 					const myRequest = { protocol: req.protocol, host: req.get('host') }
 					deleteImage.delete(myRequest, req.file.filename);
 				}
 
-				const message = `Duplicate data ${body.username}`;
+				const message = `Duplicate data ${body.name}`;
 				return myResponse.response(res, "failed", "", 409, message);
 			}
 		}
@@ -185,8 +184,8 @@ async function patchUser(req, res) {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				data = {
 					...body,
-					image: `${config.imageUrlPath(req)}${req.file.filename}`,
 					image: `${req.file.filename}`,
+					// image: `${config.imageUrlPath(req)}${req.file.filename}`,
 				};
 			} else {
 				// delete new file when not an image
@@ -204,12 +203,12 @@ async function patchUser(req, res) {
 			data.password = hash;
 		}
 
-		// update the user data
-		const result = await usersModel.updateData(data, id);
+		// update the product data
+		const result = await productsModel.updateData(data, id);
 
 		// prepare the respond data
 		const newData = {
-			user_id: id,
+			product_id: id,
 			...data,
 		};
 
@@ -231,7 +230,7 @@ async function patchUser(req, res) {
 			const myRequest = { protocol: req.protocol, host: req.get('host') }
 			deleteImage.delete(myRequest, req.file.filename);
 
-			const message = `Update data ${data.username} failed `;
+			const message = `Update data ${data.name} failed `;
 			return myResponse.response(res, "failed", "", 500, message);
 		}
 	} catch (error) {
@@ -247,15 +246,15 @@ async function patchUser(req, res) {
 	}
 }
 
-async function deleteUser(req, res) {
+async function deleteProduct(req, res) {
 	try {
 		const id = req.params.id;
-		const oldData = await usersModel.getDataById(id);
+		const oldData = await productsModel.getDataById(id);
 		if (oldData.length < 1) {
 			const message = `Data with id ${id} not found`;
 			return myResponse.response(res, "failed", "", 404, message);
 		}
-		const result = await usersModel.deleteData(id);
+		const result = await productsModel.deleteData(id);
 		if (result.affectedRows > 0) {
 			const imageName = oldData[0].image.split('/').pop();
 			if (imageName != 'default.png') {
@@ -277,10 +276,10 @@ async function deleteUser(req, res) {
 /**
  * Another CRUD
  */
-async function getUserById(req, res) {
+async function getProductById(req, res) {
 	try {
 		const id = req.params.id;
-		const result = await usersModel.getDataById(id);
+		const result = await productsModel.getDataById(id);
 		
 		return myResponse.response(res, "success", result, 200, 'Ok');
 	} catch (error) {
@@ -289,25 +288,20 @@ async function getUserById(req, res) {
 	}
 }
 
-async function getUserOrders(req, res) {
+async function getPopularProducts(req, res) {
 	try {
-		const id = req.params.id;
-		const result = await usersModel.getDataUserOrders(id);
-
-		return myResponse.response(res, "success", result, 200, 'Ok');
-	} catch (error) {
-		console.log(error);
-		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
-	}
-}
-
-async function getDetailUserOrders(req, res) {
-	try {
-		const user_id = req.params.user_id;
-		const order_id = req.params.order_id
-		const result = await usersModel.getDataDetailUserOrders(user_id, order_id);
-
-		return myResponse.response(res, "success", result, 200, 'Ok');
+		const filters = req.query;
+		const fields = await productsModel.getFieldsName();
+		const totalData = await productsModel.getTotalData();
+		const generatedFilters = myHelpers.generateFilters(filters, fields);
+		const result = await productsModel.getPopularData(generatedFilters, totalData, fields);
+		if (result.result > 0) {
+			result.previousPage = req.protocol + '://' + req.get('host') + req.originalUrl;
+			if (req.query.page > 1) result.previousPage = result.previousPage.replace(`page=${req.query.page}`, `page=${parseInt(req.query.page) - 1}`)
+			result.nextPage = req.protocol + '://' + req.get('host') + req.originalUrl;
+			result.nextPage = result.nextPage.replace(`page=${req.query.page}`, `page=${parseInt(req.query.page) + 1}`)
+		}
+		return myResponse.response(res, "success", result, 200, "Ok!");
 	} catch (error) {
 		console.log(error);
 		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
@@ -315,11 +309,9 @@ async function getDetailUserOrders(req, res) {
 }
 
 module.exports = {
-	postUser,
-	patchUser,
-	deleteUser,
-	getUsers,
-	getUserById,
-	getUserOrders,
-	getDetailUserOrders
+	postProduct,
+	patchProduct,
+	deleteProduct,
+	getProducts,
+	getProductById
 }

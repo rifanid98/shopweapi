@@ -19,8 +19,11 @@ const authMiddleware = require('../middlewares/mdl_auth');
 const authController = require('../controllers/c_auth');
 
 // register user
-router.post('/register', upload.none(), authController.register);
 router.post('/login', upload.none(), authController.login);
+router.post('/register', upload.none(), authController.register);
+router.post('/resetpassword', upload.none(), authController.resetPassword);
+router.post('/request/otp', upload.none(), authController.requestOTP);
+router.post('/confirm/otp', upload.none(), authController.confirmOTP);
 router.post('/refreshtoken', upload.none(), authController.refresh_token);
 
 module.exports = router;

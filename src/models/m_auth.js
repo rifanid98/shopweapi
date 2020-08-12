@@ -20,8 +20,8 @@ module.exports = {
 
   login: function (data) {
     return new Promise((resolve, reject) => {
-      const sqlQuery = "SELECT * FROM users WHERE username = ?";
-      conn.query(sqlQuery, data, function (error, result) {
+      const sqlQuery = "SELECT * FROM users WHERE username = ? OR email = ?";
+      conn.query(sqlQuery, [data, data], function (error, result) {
         if (error) {
           reject(error);
         }
@@ -33,6 +33,18 @@ module.exports = {
   getDataByName: function (data) {
     return new Promise((resolve, reject) => {
       const sqlQuery = "SELECT * FROM users WHERE username = ?";
+      conn.query(sqlQuery, data, function (error, result) {
+        if (error) {
+          reject(error);
+        }
+        resolve(result);
+      })
+    })
+  },
+
+  getDataByEmail: function (data) {
+    return new Promise((resolve, reject) => {
+      const sqlQuery = "SELECT * FROM users WHERE email = ?";
       conn.query(sqlQuery, data, function (error, result) {
         if (error) {
           reject(error);
