@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2020 at 12:11 PM
+-- Generation Time: Aug 13, 2020 at 12:49 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -92,12 +92,11 @@ CREATE TABLE `colors` (
 --
 
 INSERT INTO `colors` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'red', '2020-08-10 14:14:34', '2020-08-10 14:14:34'),
-(2, 'yellow', '2020-08-10 14:14:44', '2020-08-10 14:14:44'),
-(3, 'blue', '2020-08-10 14:14:51', '2020-08-10 14:14:51'),
-(4, 'purple', '2020-08-10 14:15:01', '2020-08-10 14:15:01'),
-(5, 'orange', '2020-08-10 14:15:04', '2020-08-10 14:15:04'),
-(6, 'pink', '2020-08-10 14:15:08', '2020-08-10 14:15:08');
+(1, '#000000', '2020-08-10 14:14:34', '2020-08-12 22:42:04'),
+(2, '#B82222', '2020-08-10 14:14:44', '2020-08-12 22:41:59'),
+(3, '#E2BB8D', '2020-08-10 14:14:51', '2020-08-12 22:42:11'),
+(4, '#BEA9A9', '2020-08-10 14:15:01', '2020-08-12 22:41:47'),
+(5, '#E2BB8D', '2020-08-10 14:15:04', '2020-08-12 22:41:23');
 
 -- --------------------------------------------------------
 
@@ -123,25 +122,29 @@ CREATE TABLE `detail_order` (
 --
 
 INSERT INTO `detail_order` (`id`, `order_id`, `product_id`, `size`, `color`, `price`, `quantity`, `sub_total`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 's', 'yellow', 123, 1, 123, '2020-08-10 14:54:40', '2020-08-10 14:54:40'),
-(2, 1, 2, 'l', 'blue', 44, 1, 44, '2020-08-10 14:54:40', '2020-08-10 15:11:21'),
-(3, 2, 2, 's', 'yellow', 22, 2, 44, '2020-08-10 14:55:32', '2020-08-10 14:55:32'),
-(4, 2, 3, 'l', 'blue', 99, 1, 99, '2020-08-10 14:55:32', '2020-08-10 14:55:32'),
-(5, 3, 3, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
-(6, 3, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
-(7, 4, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:23', '2020-08-10 14:56:23'),
-(8, 5, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
-(9, 5, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
-(10, 5, 6, 'l', 'blue', 33, 1, 33, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
-(11, 6, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
-(12, 6, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
-(13, 6, 6, 'l', 'blue', 33, 1, 33, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
-(14, 7, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 14:57:41', '2020-08-10 14:57:41'),
-(15, 7, 4, 'l', 'blue', 111, 1, 111, '2020-08-10 14:57:41', '2020-08-10 14:57:41'),
-(17, 8, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:28:22', '2020-08-10 15:28:22'),
-(18, 9, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:29:40', '2020-08-10 15:29:40'),
-(19, 10, 5, 's', 'yellow', 32, 2, 64, '2020-08-10 15:30:29', '2020-08-10 15:30:29'),
-(20, 11, 5, 's', '#FFFFFF', 32, 2, 64, '2020-08-10 15:31:21', '2020-08-11 06:38:12');
+(1, 1, 1, 's', '#B82222', 123, 1, 123, '2020-08-10 14:54:40', '2020-08-12 22:43:10'),
+(2, 1, 2, 'l', '#BEA9A9', 44, 1, 44, '2020-08-10 14:54:40', '2020-08-12 22:43:23'),
+(3, 2, 2, 's', '#B82222', 22, 2, 44, '2020-08-10 14:55:32', '2020-08-12 22:43:10'),
+(4, 2, 3, 'l', '#BEA9A9', 99, 1, 99, '2020-08-10 14:55:32', '2020-08-12 22:43:35'),
+(5, 3, 3, 's', '#B82222', 32, 2, 64, '2020-08-10 14:56:04', '2020-08-12 22:43:10'),
+(6, 3, 4, 'l', '#BEA9A9', 111, 1, 111, '2020-08-10 14:56:04', '2020-08-12 22:43:35'),
+(7, 4, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 14:56:23', '2020-08-12 22:43:10'),
+(8, 5, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 14:56:47', '2020-08-12 22:43:10'),
+(9, 5, 4, 'l', '#BEA9A9', 111, 1, 111, '2020-08-10 14:56:47', '2020-08-12 22:43:35'),
+(10, 5, 6, 'l', '#BEA9A9', 33, 1, 33, '2020-08-10 14:56:47', '2020-08-12 22:43:35'),
+(11, 6, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 14:57:36', '2020-08-12 22:43:10'),
+(12, 6, 4, 'l', '#BEA9A9', 111, 1, 111, '2020-08-10 14:57:36', '2020-08-12 22:43:35'),
+(13, 6, 6, 'l', '#BEA9A9', 33, 1, 33, '2020-08-10 14:57:36', '2020-08-12 22:43:35'),
+(14, 7, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 14:57:41', '2020-08-12 22:43:10'),
+(15, 7, 4, 'l', '#BEA9A9', 111, 1, 111, '2020-08-10 14:57:41', '2020-08-12 22:43:35'),
+(17, 8, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 15:28:22', '2020-08-12 22:43:10'),
+(18, 9, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 15:29:40', '2020-08-12 22:43:10'),
+(19, 10, 5, 's', '#B82222', 32, 2, 64, '2020-08-10 15:30:29', '2020-08-12 22:43:10'),
+(20, 11, 5, 's', '#FFFFFF', 32, 2, 64, '2020-08-10 15:31:21', '2020-08-11 06:38:12'),
+(21, 13, 1, 's', '#B82222', 123, 1, 123, '2020-08-12 20:22:47', '2020-08-12 22:43:10'),
+(22, 13, 2, 'l', '#BEA9A9', 44, 1, 44, '2020-08-12 20:22:47', '2020-08-12 22:43:35'),
+(23, 14, 1, 's', '#B82222', 123, 1, 123, '2020-08-12 20:26:12', '2020-08-12 22:42:55'),
+(24, 14, 2, 'l', '#BEA9A9', 44, 1, 44, '2020-08-12 20:26:12', '2020-08-12 22:43:35');
 
 -- --------------------------------------------------------
 
@@ -164,16 +167,18 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `tracking_number`, `address`, `payment_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '15028910082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-10 14:54:40', '2020-08-10 14:54:40'),
-(2, 1, '15895410082020', 'home-user-dramaga-bogor-16620-089606415122', 1, '2020-08-10 14:55:31', '2020-08-10 14:55:31'),
-(3, 2, '26011410082020', 'home-user-dramaga-bogor-16620-089606415122', 3, '2020-08-10 14:56:04', '2020-08-10 14:56:04'),
-(4, 3, '37795910082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:56:23', '2020-08-10 14:56:23'),
-(5, 3, '36193510082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:56:47', '2020-08-10 14:56:47'),
-(6, 3, '31154810082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 14:57:36', '2020-08-10 14:57:36'),
-(8, 3, '38438110082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:28:22', '2020-08-10 15:28:22'),
-(9, 3, '39396410082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:29:40', '2020-08-10 15:29:40'),
-(10, 3, '31307810082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:30:29', '2020-08-10 15:30:29'),
-(11, 3, '34395710082020', 'home-user-dramaga-bogor-16620-089606415122', 2, '2020-08-10 15:31:21', '2020-08-10 15:31:21');
+(1, 1, '15028910082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 1, '2020-08-10 14:54:40', '2020-08-12 22:39:51'),
+(2, 1, '15895410082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 1, '2020-08-10 14:55:31', '2020-08-12 22:39:51'),
+(3, 2, '26011410082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 3, '2020-08-10 14:56:04', '2020-08-12 22:39:51'),
+(4, 3, '37795910082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 14:56:23', '2020-08-12 22:39:51'),
+(5, 3, '36193510082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 14:56:47', '2020-08-12 22:39:51'),
+(6, 3, '31154810082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 14:57:36', '2020-08-12 22:39:51'),
+(8, 3, '38438110082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 15:28:22', '2020-08-12 22:39:51'),
+(9, 3, '39396410082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 15:29:40', '2020-08-12 22:39:51'),
+(10, 3, '31307810082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 15:30:29', '2020-08-12 22:39:51'),
+(11, 3, '34395710082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 2, '2020-08-10 15:31:21', '2020-08-12 22:39:51'),
+(13, 1, '18704613082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 1, '2020-08-12 20:22:47', '2020-08-12 22:39:51'),
+(14, 1, '11548013082020', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620', 1, '2020-08-12 20:26:12', '2020-08-12 22:39:41');
 
 -- --------------------------------------------------------
 
@@ -229,17 +234,17 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `name`, `category_id`, `categories`, `colors`, `sizes`, `price`, `image`, `quantity`, `description`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 'erka', 1, 'men|women|boys', 'red|blue|#000000|#FFFFFF', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 4, 'description', 3, '2020-08-10 14:45:09', '2020-08-11 06:47:54'),
-(2, 2, 'ultralight jacket', 1, 'men|women|boys', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:46:45', '2020-08-10 14:55:31'),
-(3, 3, 'pote', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:47:08', '2020-08-10 14:56:04'),
-(4, 3, 'XABA x RK', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', -1, 'description', 3, '2020-08-10 14:47:43', '2020-08-10 14:57:40'),
-(5, 4, 'leon jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', -9, 'description', 3, '2020-08-10 14:47:59', '2020-08-10 15:31:21'),
-(6, 5, 'cameo jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 2, 'description', 3, '2020-08-10 14:48:10', '2020-08-10 14:57:41'),
-(7, 6, 'polo', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:20', '2020-08-10 14:48:20'),
-(8, 7, 'dom jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:34', '2020-08-10 14:48:34'),
-(9, 8, 'kolar jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:47', '2020-08-10 14:48:47'),
-(10, 9, 'viral jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:48:58', '2020-08-10 14:48:58'),
-(11, 10, 'bomber jacket', 1, 'men|women|boys|girls', 'red|blue|yellow', 's|m|l', 123, 'http://192.168.42.15:3000/shopwe/images/default.png', 5, 'description', 3, '2020-08-10 14:49:44', '2020-08-10 14:49:44');
+(1, 1, 'erka', 1, 'men|women', '#000000|#F7F7F7|#B82222|#BEA9A9|#E2BB8D', 's|m|l|xl', 53, '2020-08-12T21:22:51.939Zerka.jpg', 10, 'ERKA jackets are jackets designed with the best functional features so that they can be used in daily activities and adventures such as traveling, riding, hiking, trekking and summit attacks. By using quality outer and inner materials that have been researched.\r\n\r\n18 Detailed Features of ERKA Jacket:\r\nThe outside part :\r\n01. Waterproof (water repellent / taro leaves effect if exposed to water)\r\n02.Windproof (anti wind)\r\n03. A hoodie that can be put in and can look casual\r\n04. Adjustable hoodie\r\n05. The head of the hoodie like a hat protects it from the sun\r\n06. Wallet Pocket\r\n07. Left and Right Pocket\r\n08. Beverage Bottle Pocket\r\n09. Card Pocket\r\n10. 2 Zipper Heads (Makes it easy to open the zipper from below)\r\nThe inside part :\r\n11. HP pocket\r\n12. Powerbank pocket\r\n13. Little Book Pocket\r\n14. Pen pocket\r\n15. Pocket Glasses\r\n16. Book / Tablet Pocket\r\n17. Earphone Holder\r\n18. Additional jacket bag', 3, '2020-08-10 14:45:09', '2020-08-12 22:28:12'),
+(2, 2, 'ultralight jacket', 1, 'women|boys', '#F7F7F7|#B82222|#BEA9A9|#E2BB8D', 's|m|l', 67, '2020-08-12T21:25:31.815Z2ultralight.jpg', 10, 'FIRST IN INDONESIA & THE WORLD !!!\r\n\r\nThis multifunctional Ultralight jacket which is very light for a hand grip has a weight of about 160-200 grams (depending on size), very light and easy to carry everywhere.\r\n\r\n \r\n\r\nThis product is made using quality materials that can withstand water (Waterproof) with light rain intensity and wind resistance (Windproof), it is very suitable for daily (daily) and outdoor activities (running), cycling, climbing mountains (hiking), long trips (traveling), driving (touring) and activities that have high mobility but want to appear Fashionable, Simple and Practical.\r\n\r\n\r\nBe a part of history in the world of fashion by owning this product, proud to use local products made by the nation\'s own children and get the best features.', 5, '2020-08-10 14:46:45', '2020-08-12 22:47:32'),
+(3, 3, 'pote', 1, 'men|girls', '#000000|#F7F7F7|#B82222|#BEA9A9', 'xs|s|m|l', 44, '2020-08-12T21:25:43.083Zpote.jpg', 10, 'POTE series is a t-shirt that is equipped with a front pocket (t-shirt pocket) which functions to store small things, interestingly this shirt is equipped with unique, simple and cool designs.', 3, '2020-08-10 14:47:08', '2020-08-12 22:47:27'),
+(4, 3, 'XABA x RK', 1, 'girls|women', '#000000|#F7F7F7|#BEA9A9|#E2BB8D', 's|m|l', 65, '2020-08-12T21:29:24.784ZxabaXrk.jpg', 10, 'The KEI jacket is a bomber version jacket that we specially designed in collaboration between XABA and Rumah Komunitas to appear more exclusive and dynamic. This jacket is suitable for daily activities, both in driving, casual and casual for both men and women.\r\n\r\n9 Detailed Features:\r\n01. Wallet Pocket\r\n02. Pencil Pocket\r\n03. Card Pocket\r\n04. Reflective Screen Printing\r\n05. HP / Gadget Poacket\r\n06. Side Pocket Zipper\r\n07. Waterproof\r\n08. Windproof\r\n09. Can Turn into a Sling Bag', 4, '2020-08-10 14:47:43', '2020-08-12 22:47:21'),
+(5, 4, 'leon jacket', 1, 'girls|women', '#000000|#F7F7F7|#B82222|#BEA9A9|#E2BB8D', 's|m|l', 51, '2020-08-12T21:25:59.712ZLeon.jpg', 10, 'Leon jacket is a multifunctional zipper hoodie jacket that uses quality materials equipped with the latest innovative features to facilitate daily activities.\r\n\r\n8 Detailed Features:\r\n01. Eyemask (Eye Patch)\r\n02. Earphone Holder (Earphone / Headset)\r\n03. Mobile Pocket (Mobile Pocket)\r\n04. Powerbank Pocket (Powerbank Pocket)\r\n05. Gloves\r\n06.Hand Warming Pocket (Hand Warming Pocket)\r\n07. Wallet Pocket (Wallet Pocket)\r\n08. Pencil & Sunglass Pocket (Pencil & Glasses Pocket)\r\n\r\n+ Additional Features Could Be A Sling Bag\r\n\r\nMaterial & Accessories Specifications:\r\n01. Baby Tery Fabric (cool and comfortable to use)\r\n02. Premium Mesh Furing\r\n03. YKK Zipper', 3, '2020-08-10 14:47:59', '2020-08-12 22:47:17'),
+(6, 5, 'cameo jacket', 1, 'boys|men', '#000000|#B82222|#BEA9A9|#E2BB8D', 's|m|l', 70, '2020-08-12T21:26:09.004Zcameo.jpg', 10, 'The Cameo jacket is a multifunctional coach jacket whose model has been reformed so that it can be used in several themes, namely being able to be sporty, traveling and casual.\r\n\r\n6 Detailed Features of Cameo Jackets:\r\n01. Wrist Sleeve Button (Wrist using the button)\r\n02. Wallet Pocket (Wallet Pocket)\r\n03. Mobile Pocket (Mobile Pocket)\r\n04. Earphone Holder (Earphone Holder)\r\n05. Waterproof\r\n06. Windproof\r\n\r\n\r\n* Using the best materials for Waterproof, Windproof and Breathable / Comfortable\r\n\r\n#rumahkomunitas #rkproject', 2, '2020-08-10 14:48:10', '2020-08-12 22:47:03'),
+(7, 6, 'polo', 1, 'boys|men', '#000000|#F7F7F7|#B82222|#E2BB8D', 'xs|s|m|l', 50, '2020-08-12T21:26:19.246Zpolo.jpg', 5, 'This outfit is indeed a must-have for everyone, because besides being able to be used for casual wear, this outfit is also suitable for use in semi-formal situations. Rene Lacoste is the person behind this polo shirt. He is one of the founders of the Lacoste company, a well-known clothing company in France.', 3, '2020-08-10 14:48:20', '2020-08-12 22:46:58'),
+(8, 7, 'dom jacket', 1, 'boys|girls', '#000000|#F7F7F7|#BEA9A9|#E2BB8D', 's|m|l', 30, '2020-08-12T21:29:47.711Zkolar.jpg', 10, 'Since 2015 Rumah Komunitas has always presented innovative merchandise in each of its products, using quality materials with an exclusive product design model is more value than Rumah Komunitas merchandise compared to other merchandise brands.\r\n\r\nDOM, the latest multifunctional jacket innovation from Rumah Komunitas that provides convenience and happiness in every activity, is equipped with 16 selected detailed features.\r\n\r\nWe dedicate this jacket to all families / couples who love each other where playing with them is the most precious and irreplaceable time.\r\n\r\nThere are already many choices of colors and sizes that you can customize according to your wishes for both adult men and women as well as children.\r\n\r\nHappy Playing & Happy ...', 3, '2020-08-10 14:48:34', '2020-08-12 22:46:51'),
+(9, 8, 'kolar jacket', 1, 'boys|girls', '#F7F7F7|#B82222|#BEA9A9|#E2BB8D', 'xs|s|m|l', 45, '2020-08-12T21:26:31.296Zkolar.jpg', 10, 'The KOLAR jacket is a bomber version of the jacket with a collared style and features the details that everyone needs. This jacket is suitable for daily activities, whether driving, casual and casual.\r\n\r\nDetailed Features:\r\nThe outside part :\r\n01. Waterproof (water repellent / taro leaves effect if exposed to water)\r\n02.Windproof (anti wind)\r\n03. 2 Pocket left & right side use zippers\r\nThe inside part :\r\n04. Gadget Pocket (Can be used for HP / Tablet / Wallet)\r\n05. Book Pocket', 5, '2020-08-10 14:48:47', '2020-08-12 22:46:47'),
+(10, 9, 'viral jacket', 1, 'men|women', '#000000|#F7F7F7|#B82222|#BEA9A9', 's|m|l', 36, '2020-08-12T21:27:08.733Zviral.jpg', 10, 'The VIRAL jacket is a multifunctional jacket with the best detail features and can be turned into a sling bag.\r\n\r\n8 Detailed Features of VIRAL Jacket:\r\n01. Wallet Pocket (Wallet Pocket)\r\n02. Gadgets Pocket (Pocket HP / Smartphone)\r\n03. Waterproof Zipper (zippers waterproof / wind)\r\n04.Detachable Hoodies (Hoodie can be removed)\r\n05. Flexible Rib Jacket (Wrist using rib)\r\n06. Up to 7 inch Tablet Pocket (Can fit tablets up to 7 inches)\r\n07. Book Pocket (Book Pocket / can fit into a 10 inch tablet)\r\n08. Can Turn into a sling bag (Can turn into a sling bag)\r\n\r\n\r\n* Using the best materials for Waterproof, Windproof and Breathable / Comfortable\r\n\r\n#rumahkomunitas #rkproject', 3, '2020-08-10 14:48:58', '2020-08-12 22:46:39'),
+(11, 10, 'bomber jacket', 1, 'men|women', '#000000|#B82222|#BEA9A9|#E2BB8D', 'xs|s|m|l', 69, '2020-08-12T21:27:28.402ZxabaXrk.jpg', 10, 'The bomber jacket is the jacket that is most often used by everyday people, a jacket that was originally intended for pilots, but the fashion world has modified this bomber jacket more simply and has become the most popular casual wear today.\r\n\r\nBOMBER Jacket Detail Features:\r\n01. Pocket Tablet / HP\r\n02. Left and right pockets use zippers\r\n03. Wallet Pocket\r\n04. Premium mesh lining\r\n05. Waterproof\r\n06. Windproof\r\n\r\nMaterial Specifications:\r\n- Outer material: Taslan-Despo Waterproof\r\n- Inner Material: Premium Mesh Furing\r\n\r\nTips on how to wash a waterproof jacket\r\n\r\n#rumahkomunitas # rkproject4 #jaketbomber #jaketmultifungsi', 4, '2020-08-10 14:49:44', '2020-08-12 22:46:33');
 
 -- --------------------------------------------------------
 
@@ -294,12 +299,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `full_name`, `birth`, `email`, `password`, `phone`, `image`, `address`, `address_active`, `role`, `access_key`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin manager', '1998-11-21', 'adninsijawa.medsos@gmail.com', '$2b$10$FXWXM2Gq3LHPy85Z9DTjRuVCFaU0ihLqJzXmJqPwjwUt1BjEDIOiG', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'AM80356', '2020-08-10 10:13:35', '2020-08-10 10:13:35'),
-(2, 'staff', 'staff manager', '1998-11-21', 'adninsijawa.staff@gmail.com', '$2b$10$ftjzv79NgMdvB/uN3Mhh0O9WmHYb/klbO6Q4eu.GWts9Z3..9qBPm', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'SM18015', '2020-08-10 10:14:16', '2020-08-10 10:15:03'),
-(3, 'user', 'user manager', '1998-11-21', 'adninsijawa.user@gmail.com', '$2b$10$nCD9jtVTZKgxSMlYdbUGjO/pQ2rxq5fxOmWTYR8848dDqbsctKCKG', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'UM42836', '2020-08-10 10:14:45', '2020-08-10 10:14:45'),
-(4, 'client', 'client manager', '1998-11-21', 'adninsijawa.client@gmail.com', '$2b$10$c50GPRHoq8lUJDfNgXpJI.u5w.yFOS9kfijz72FA9vtVgnoqpQvzS', '089606415122', 'http://192.168.42.15:3000/shopwe/images/default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea kab. bogor-bogor-16620-089606415122-id|office-sinta-cibeureum, kec. dramaga, kab. bogor-bogor-16610-089606445236-id|villa-dicky-puncak, kab. bogor-kota-166523-081245687953-id', 0, 1, 'CM48629', '2020-08-10 10:15:21', '2020-08-10 10:15:21'),
-(6, 'user_test', 'user_test', '2020-08-10', 'adninsijawa@usertest.com', '$2b$10$FMR0utwuWLBe7kjG1Oc7CuTC3XPHDAVxxETkn.asOWLfxg/7PRhmG', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'UU82807', '2020-08-10 10:22:53', '2020-08-10 10:25:24'),
-(7, 'testing', 'testing', '2020-08-11', 'adninsijawa@testing.com', '$2b$10$YcOdzPmm.R/EHtnDGrEitebDADiS.ulU9RyuT67i0BJOeA494Gqme', NULL, 'http://192.168.42.15:3000/shopwe/images/avatar.png', NULL, NULL, 3, 'TT85573', '2020-08-11 06:28:43', '2020-08-11 08:23:22');
+(1, 'admin', 'daw', '2020-08-08', 'adninsijawa.medsos@gmail.com', '$2b$10$FXWXM2Gq3LHPy85Z9DTjRuVCFaU0ihLqJzXmJqPwjwUt1BjEDIOiG', '089606415122', 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', 0, 1, 'AM80356', '2020-08-10 10:13:35', '2020-08-12 22:45:59'),
+(2, 'staff', 'staff manager', '1998-11-21', 'adninsijawa.staff@gmail.com', '$2b$10$ftjzv79NgMdvB/uN3Mhh0O9WmHYb/klbO6Q4eu.GWts9Z3..9qBPm', '089606415122', 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', 0, 1, 'SM18015', '2020-08-10 10:14:16', '2020-08-12 22:45:59'),
+(3, 'user', 'user manager', '1998-11-21', 'adninsijawa.user@gmail.com', '$2b$10$nCD9jtVTZKgxSMlYdbUGjO/pQ2rxq5fxOmWTYR8848dDqbsctKCKG', '089606415122', 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', 0, 1, 'UM42836', '2020-08-10 10:14:45', '2020-08-12 22:45:59'),
+(4, 'client', 'client manager', '1998-11-21', 'adninsijawa.client@gmail.com', '$2b$10$c50GPRHoq8lUJDfNgXpJI.u5w.yFOS9kfijz72FA9vtVgnoqpQvzS', '089606415122', 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', 0, 1, 'CM48629', '2020-08-10 10:15:21', '2020-08-12 22:45:59'),
+(6, 'user_test', 'user_test', '2020-08-10', 'adninsijawa@usertest.com', '$2b$10$FMR0utwuWLBe7kjG1Oc7CuTC3XPHDAVxxETkn.asOWLfxg/7PRhmG', NULL, 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', NULL, 3, 'UU82807', '2020-08-10 10:22:53', '2020-08-12 22:45:59'),
+(7, 'testing', 'testing', '2020-08-11', 'adninsijawa@testing.com', '$2b$10$YcOdzPmm.R/EHtnDGrEitebDADiS.ulU9RyuT67i0BJOeA494Gqme', NULL, 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', NULL, 3, 'TT85573', '2020-08-11 06:28:43', '2020-08-12 22:45:59'),
+(8, 'kacau', 'kacau', '2020-08-12', 'adninsijawa@gmail.com', '$2b$10$G8z/BWp.sXOWioDV4swKhuh/7CnYzzBTLuqs0GG9ECoPuiK9trPl6', NULL, 'default.png', 'home-adnin rifandi-kp.pasar rebo, ds. cihideung udik, kec. ciampea-bogor-jawa barat-indonesia-16620|office-sinta-kp.cibeureum petir, ds. cibeureum, kec. dramaga-bogor-jawa barat-indonesia-16620', NULL, 3, 'KK47555', '2020-08-12 16:42:50', '2020-08-12 22:45:59');
 
 --
 -- Indexes for dumped tables
@@ -391,25 +397,25 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT for table `detail_order`
 --
 ALTER TABLE `detail_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -421,7 +427,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
