@@ -86,7 +86,7 @@ module.exports = {
     })
     return result;
   },
-  createQuery: function (query, filters, totalData, fields, groups = null, ANDExceptions = null) {
+  createQuery: function (query, filters, totalData, fields, groups = null, ANDExceptions = null, customFields = null) {
     const search = filters.search;
     const filter = filters.filter;
     const sort = filters.sort;
@@ -95,7 +95,11 @@ module.exports = {
 
     // search
     if (Object.keys(search).length > 0) {
-      sqlQuery += " WHERE " + this.createSQLLikeFromObj(fields, filters.search.search);
+      if (customFields) {
+        sqlQuery += " WHERE " + this.createSQLLikeFromObj(customFields, filters.search.search);
+      } else {
+        sqlQuery += " WHERE " + this.createSQLLikeFromObj(fields, filters.search.search);
+      }
     }
 
     // filter
