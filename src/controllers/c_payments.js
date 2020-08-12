@@ -72,11 +72,13 @@ async function postPayment(req, res) {
 
 		if (req.file === undefined) {
 			// set default file when no image to upload
-			body.image = `${config.imageUrlPath(req)}payment.jpg`;
+			body.image = `payment.jpg`;
+			// body.image = `${config.imageUrlPath(req)}payment.jpg`;
 		} else {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				// get the image name and set into data
-				body.image = `${config.imageUrlPath(req)}${req.file.filename}`;
+				body.image = `${req.file.filename}`;
+				// body.image = `${config.imageUrlPath(req)}${req.file.filename}`;
 			} else {
 				// delete new file when not an image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
@@ -90,7 +92,6 @@ async function postPayment(req, res) {
 		const result = await paymentsModel.addData(body);
 		if (result.affectedRows > 0) {
 			body.id = result.insertId;
-			delete body.password
 			return myResponse.response(res, "success", body, 201, "Created!");
 		} else {
 			if (req.file) {
@@ -161,7 +162,8 @@ async function patchPayment(req, res) {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				data = {
 					...body,
-					image: `${config.imageUrlPath(req)}${req.file.filename}`,
+					image: `${req.file.filename}`,
+					// image: `${config.imageUrlPath(req)}${req.file.filename}`,
 				};
 			} else {
 				// delete new file when not an image
@@ -172,13 +174,6 @@ async function patchPayment(req, res) {
 				return myResponse.response(res, "failed", "", 500, message);
 			}
 		}
-
-		if (data.password) {
-			const salt = bcrypt.genSaltSync(10);
-			const hash = bcrypt.hashSync(data.password, salt);
-			data.password = hash;
-		}
-
 		// update the payment data
 		const result = await paymentsModel.updateData(data, id);
 
@@ -190,7 +185,8 @@ async function patchPayment(req, res) {
 
 		// if update is success
 		if (result.affectedRows > 0) {
-			const imageName = oldData[0].image.split('/').pop();
+			const imageName = oldData[0].image;
+			// const imageName = oldData[0].image.split('/').pop();
 			if (imageName != 'payment.jpg' && req.file !== undefined) {
 				// delete old image when not default image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }

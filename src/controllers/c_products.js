@@ -93,11 +93,13 @@ async function postProduct(req, res) {
 
 		if (req.file === undefined) {
 			// set default file when no image to upload
-			body.image = `${config.imageUrlPath(req)}default.png`;
+			body.image = `default.png`;
+			// body.image = `${config.imageUrlPath(req)}default.png`;
 		} else {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				// get the image name and set into data
-				body.image = `${config.imageUrlPath(req)}${req.file.filename}`;
+				body.image = `${req.file.filename}`;
+				// body.image = `${config.imageUrlPath(req)}${req.file.filename}`;
 			} else {
 				// delete new file when not an image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
@@ -182,7 +184,8 @@ async function patchProduct(req, res) {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				data = {
 					...body,
-					image: `${config.imageUrlPath(req)}${req.file.filename}`,
+					image: `${req.file.filename}`,
+					// image: `${config.imageUrlPath(req)}${req.file.filename}`,
 				};
 			} else {
 				// delete new file when not an image
@@ -211,7 +214,8 @@ async function patchProduct(req, res) {
 
 		// if update is success
 		if (result.affectedRows > 0) {
-			const imageName = oldData[0].image.split('/').pop();
+			const imageName = oldData[0].image;
+			// const imageName = oldData[0].image.split('/').pop();
 			if (imageName != 'default.png' && req.file !== undefined) {
 				// delete old image when not default image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
