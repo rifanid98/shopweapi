@@ -33,7 +33,7 @@ router.use('/colors', validationMiddleware.xssEscape, authMiddleware.verifyJwtTo
 router.use('/sizes', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, sizesRouter);
 router.use('/brands', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, brandsRouter);
 router.use('/categories', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, categoriesRouter);
-router.use('/products', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, productsRouter);
+router.use('/products', validationMiddleware.xssEscape, productsRouter);
 router.use('/payments', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, paymentsRouter);
 router.use('/orders', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, ordersRouter);
 router.use('/detailorder', validationMiddleware.xssEscape, authMiddleware.verifyJwtToken, detailOrderRouter);
