@@ -18,19 +18,35 @@ async function getData(filters, totalData, fields) {
   const sqlQuery = `
   SELECT 
     p.* ,
-    c.name AS category_name
+    c.name AS category_name,
+    b.name AS brand_name
   FROM 
     products AS p
   INNER JOIN 
     categories AS c
   ON 
-  c.id = p.category_id
-  AND p.quantity <> 0
+    c.id = p.category_id
+  AND 
+    p.quantity <> 0
+
+  INNER JOIN 
+   brands AS b
+  ON b.id = p.brand_id 
   ` ;
 
-  const ANDExceptions = ['sizes', 'colors', 'c.name'];
+  const ANDExceptions = ['sizes', 'colors', 'categories'];
   const groups = ['p.id'];
-  const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields, groups, ANDExceptions);
+  const customFields = fields;
+  delete customFields.id;
+  delete customFields.name;
+  delete customFields.created_at;
+  delete customFields.updated_at;
+  customFields['c.name'] = 'c.name';
+  customFields['p.name'] = 'p.name';
+  customFields['p.name'] = 'p.name';
+  customFields['p.created_at'] = 'p.created_at';
+  customFields['p.updated_at'] = 'p.updated_at';
+  const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields, groups, ANDExceptions, customFields);
   return new Promise((resolve, reject) => {
     conn.query(query.sqlQuery, function (error, result) {
       if (error) {
@@ -149,6 +165,7 @@ async function getPopularData(filters, totalData, fields) {
   const sqlQuery = `
   SELECT
     p.*,
+    b.name AS brand_name,
     SUM(do.quantity) AS top_products
   FROM 
     detail_order AS do 
@@ -156,11 +173,28 @@ async function getPopularData(filters, totalData, fields) {
     products AS p 
   ON 
     p.id=do.product_id
-  WHERE
+  AND
     p.quantity <> 0
-  GROUP BY do.product_id 
+
+  INNER JOIN 
+    brands AS b
+  ON 
+    b.id=p.brand_id
   ` ;
-  const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields);
+  const ANDExceptions = ['sizes', 'colors', 'categories'];
+  const groups = ['do.product_id'];
+  const customFields = fields;
+  delete customFields.id;
+  delete customFields.name;
+  delete customFields.created_at;
+  delete customFields.updated_at;
+  customFields['c.name'] = 'c.name';
+  customFields['p.name'] = 'p.name';
+  customFields['p.name'] = 'p.name';
+  customFields['p.created_at'] = 'p.created_at';
+  customFields['p.updated_at'] = 'p.updated_at';
+  const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields, groups, ANDExceptions, customFields);
+  // const query = myHelpers.createQuery(sqlQuery, filters, totalData, fields);
   return new Promise((resolve, reject) => {
     conn.query(query.sqlQuery, function (error, result) {
       if (error) {
