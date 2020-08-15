@@ -334,6 +334,7 @@ module.exports = {
 			full_name: Joi.string().trim().min(3).required(),
 			email: Joi.string().email({ minDomainAtoms: 2 }),
 			password: Joi.string().trim().min(3).required(),
+			address_active: Joi.number().min(0).required(),
 			role: Joi.number().min(1).required(),
 			otp: Joi.number().min(6).required(),
 		};
@@ -455,6 +456,7 @@ module.exports = {
 	validateResetPassword: function (reset, field = null) {
 		const joiSchema = {
 			password: Joi.string().trim().min(3).required(),
+			new_password: Joi.string().trim().min(3).required(),
 			email: Joi.string().email({ minDomainAtoms: 2 }),
 			otp: Joi.number().min(6).max(6).required(),
 			id: Joi.number().min(1).required()
