@@ -223,7 +223,7 @@ CREATE TABLE `products` (
   `price` int(10) NOT NULL,
   `image` varchar(255) DEFAULT 'default.png',
   `quantity` int(4) NOT NULL DEFAULT 5,
-  `description` text NOT NULL DEFAULT 'description',
+  `description` text NULL,
   `rating` int(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -281,7 +281,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `full_name` varchar(150) NOT NULL,
-  `birth` date NOT NULL DEFAULT current_timestamp(),
+  `birth` date NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
