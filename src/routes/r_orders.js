@@ -26,7 +26,7 @@ const ordersController = require('../controllers/c_orders');
 // Get All Orders
 router.get('/', authMiddleware.checkRole([3, 2, 1]), ordersController.getOrders);
 // Post a Order
-router.post('/', authMiddleware.checkRole([2, 1]), upload.single('image'), ordersController.postOrder);
+router.post('/', authMiddleware.checkRole([3, 2, 1]), upload.single('image'), ordersController.postOrder);
 // Patch a Order
 router.patch('/:id', authMiddleware.checkRole([2, 1]), upload.single('image'), ordersController.patchOrder);
 // Delete a Order
