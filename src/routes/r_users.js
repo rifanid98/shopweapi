@@ -28,7 +28,7 @@ router.get('/', authMiddleware.checkRole([3, 2, 1]), usersController.getUsers);
 // Post a User
 router.post('/', authMiddleware.checkRole([2, 1]), upload.single('image'), usersController.postUser);
 // Patch a User
-router.patch('/:id', authMiddleware.checkRole([2, 1]), upload.single('image'), usersController.patchUser);
+router.patch('/:id', authMiddleware.checkRole([3, 2, 1]), upload.single('image'), usersController.patchUser);
 // Delete a User
 router.delete('/:id', authMiddleware.checkRole([1]), usersController.deleteUser);
 
