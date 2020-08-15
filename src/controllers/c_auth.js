@@ -152,15 +152,17 @@ async function requestOTP(req, res) {
 				break;
 		}
 		
-		if (info.messageId) {
-			const message = {
-				otp: token,
-				note: 'This is for development only!'
+		try {
+			if (info.messageId) {
+				const message = {
+					otp: token,
+					note: 'This is for development only!'
+				}
+				return myResponse.response(res, "success", message, 201, "Created!");
 			}
-			return myResponse.response(res, "success", message, 201, "Created!");	
-		} else {
+		} catch (error) {
 			const message = 'Request OTP failed. Please try again.'
-			return myResponse.response(res, "success", message, 500, "Created!");	
+			return myResponse.response(res, "Failed", "", 500, message);
 		}
 	} catch (error) {
 		console.log(error);
