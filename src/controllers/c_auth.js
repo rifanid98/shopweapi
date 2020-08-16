@@ -18,6 +18,9 @@ const myResponse = require("../helpers/myResponse");
 const validate = require("../helpers/joiSchema");
 // const validate = require("../helpers/joiSchema");
 
+// moment
+const moment = require('moment');
+
 // import bcrypt
 const bcrypt = require("bcrypt");
 
@@ -42,6 +45,7 @@ const nodemailer = require("nodemailer");
 async function register(req, res) {
 	try {
 		const body = req.body;
+		body.address_active = 0;
 
 		// validate otp
 		const isValid = totp.check(body.otp, process.env.OTP_KEY);
@@ -55,13 +59,14 @@ async function register(req, res) {
 			if (checkData < 1) {
 				if (req.file === undefined) {
 					// set default file when no image to upload
-					body.image = `${config.imageUrlPath(req)}avatar.png`;
+					body.image = `avatar.png`;
+					// body.image = `${config.imageUrlPath(req)}avatar.png`;
 				}
 
 				const username = body.full_name.split(' ')[0];
 				body.username = username;
 
-				// generate acces_key
+				// generate access_key
 				const name = body.full_name.split(' ');
 				let initialName = '';
 				if (name.length > 1) {
@@ -72,13 +77,16 @@ async function register(req, res) {
 					initialName += name[0][0];
 				}
 				const randomNumber = Math.floor(Math.random() * 90000) + 10000;
-				const acces_key = `${initialName.toUpperCase()}${randomNumber.toString()}`;
-				body.access_key = acces_key;
+				const access_key = `${initialName.toUpperCase()}${randomNumber.toString()}`;
+				body.access_key = access_key;
 
 				const salt = bcrypt.genSaltSync(10);
 				const hash = bcrypt.hashSync(body.password, salt);
 				body.password = hash;
 				body.role = 3;
+
+				const today = new moment().format('YYYY-MM-DD')
+				body.birth = today;
 
 				const result = await authModel.register(body);
 				body.insertId = result.insertId;
@@ -116,10 +124,11 @@ async function requestOTP(req, res) {
 			}
 		});
 
+		let info;
 		switch (body.requestType) {
 			case 'register':
 				// send mail with defined transport object
-				await transporter.sendMail({
+				info = await transporter.sendMail({
 					from: process.env.EMAIL,
 					to: body.email,
 					subject: 'OTP (One Time Password)',
@@ -130,7 +139,7 @@ async function requestOTP(req, res) {
 			
 			case 'resetPassword':
 				// send mail with defined transport object
-				await transporter.sendMail({
+				info = await transporter.sendMail({
 					from: process.env.EMAIL,
 					to: body.email,
 					subject: 'OTP (One Time Password)',
@@ -143,11 +152,18 @@ async function requestOTP(req, res) {
 				break;
 		}
 		
-		const message = {
-			otp: token,
-			note: 'This is for development only!'
+		try {
+			if (info.messageId) {
+				const message = {
+					otp: token,
+					note: 'This is for development only!'
+				}
+				return myResponse.response(res, "success", message, 201, "Created!");
+			}
+		} catch (error) {
+			const message = 'Request OTP failed. Please try again.'
+			return myResponse.response(res, "Failed", "", 500, message);
 		}
-		return myResponse.response(res, "success", message, 201, "Created!");
 	} catch (error) {
 		console.log(error);
 		return myResponse.response(res, "failed", "", 500, errorMessage.myErrorMessage(error, {}));
@@ -182,6 +198,7 @@ async function confirmOTP(req, res) {
 async function resetPassword(req, res) {
 	try {
 		const body = req.body;
+		console.log(body);
 		let id = 0;
 
 		if (body.otp) {
@@ -217,9 +234,16 @@ async function resetPassword(req, res) {
 				return myResponse.response(res, "failed", "", 404, message);
 			}
 			id = body.id;
+
+			if (!bcrypt.compareSync(body.password, oldData[0].password)) {
+				const message = `Password is wrong!`;
+				return myResponse.response(res, "failed", "", 400, message);
+			}
 		}
 
 		// password hashing
+		body.password = body.new_password ? body.new_password : body.password;
+		delete body.new_password;
 		const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(body.password, salt);
 		body.password = hash;
