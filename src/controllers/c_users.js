@@ -185,7 +185,7 @@ async function patchUser(req, res) {
 			if (req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png') {
 				data = {
 					...body,
-					image: `${config.imageUrlPath(req)}${req.file.filename}`,
+					// image: `${config.imageUrlPath(req)}${req.file.filename}`,
 					image: `${req.file.filename}`,
 				};
 			} else {
@@ -217,7 +217,7 @@ async function patchUser(req, res) {
 		if (result.affectedRows > 0) {
 			const imageName = oldData[0].image;
 			// const imageName = oldData[0].image.split('/').pop();
-			if (imageName != 'default.png' && req.file !== undefined) {
+			if (imageName != 'avatar.png' && req.file !== undefined) {
 				// delete old image when not default image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
 				deleteImage.delete(myRequest, oldData[0].image);
@@ -258,7 +258,7 @@ async function deleteUser(req, res) {
 		const result = await usersModel.deleteData(id);
 		if (result.affectedRows > 0) {
 			const imageName = oldData[0].image.split('/').pop();
-			if (imageName != 'default.png') {
+			if (imageName != 'avatar.png') {
 				// delete old image when not default image
 				const myRequest = { protocol: req.protocol, host: req.get('host') }
 				deleteImage.delete(myRequest, oldData[0].image);
