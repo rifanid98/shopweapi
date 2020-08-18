@@ -1,4 +1,4 @@
-**shopweapi** is a simple api endpoint for [shopwe](https://github.com/dicky-julian/e-commerce) shop application built with Node.js, Express Js as a framework of Node.js and MySQL as a database which has [features](https://github.com/rifanid98/#features) such as login / register using JWT, pasword hashing, CORS, etc.
+**shopweapi** is a simple api endpoint for [shopwe](https://github.com/dicky-julian/e-commerce) shop application built with Node.js, Express Js as a framework of Node.js and MySQL as a database which has [features](#features) such as login / register using JWT, pasword hashing, CORS, etc.
 
 ## :memo: Table Of Content
 
